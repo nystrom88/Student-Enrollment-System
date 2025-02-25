@@ -5,4 +5,11 @@
   --spacing-medium: 3rem;
   --spacing-large: 4rem;
   --spacing-x-large: 6rem;
+
+  /* Border radius */
+  --border-radius-small: 0.25rem;
+  --border-radius-medium: 0.5rem;
+
+  /* color */
+  --background-color: #abfcfc;
 }

@@ -34,125 +34,127 @@
 
     <!-- Form Modal -->
     <form class="form__add-edit-student-instructor">
-      <div class="form-group">
-        <label for="student-name">Full name: *</label>
-        <input
-          type="text"
-          name="student-name"
-          id="student-name"
-          placeholder="Enter your name"
-          minlength="1"
-          maxlength="50"
-          class="form__student-name-input"
-          required
-        />
-      </div>
-      <div class="form-group">
-        <label for="student-age">Age: *</label>
-        <input
-          type="number"
-          name="student-age"
-          id="student-age"
-          placeholder="Enter your age"
-          min="1"
-          class="form__student-age-input"
-          required
-        />
-      </div>
+      <div class="form-outer-container">
+        <div class="form-group">
+          <label for="student-name">Full name: *</label>
+          <input
+            type="text"
+            name="student-name"
+            id="student-name"
+            placeholder="Enter your name"
+            minlength="1"
+            maxlength="50"
+            class="form__student-name-input"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="student-age">Age: *</label>
+          <input
+            type="number"
+            name="student-age"
+            id="student-age"
+            placeholder="Enter your age"
+            min="1"
+            class="form__student-age-input"
+            required
+          />
+        </div>
 
-      <div class="form-group">
-        <label for="courses">Select up to 3 courses: *</label>
-        <select
-          name="courses"
-          id="courses1"
-          class="form-group__courses-select"
-          required
-        >
-          <option value="">Unselected</option>
-          <option value="art">Art</option>
-          <option value="back-end">Back-End</option>
-          <option value="bartending">Bartending</option>
-          <option value="culinary">Culinary</option>
-          <option value="english">English</option>
-          <option value="front-end">Front-End</option>
-          <option value="full-stack">Full-stack</option>
-          <option value="geography">Geography</option>
-          <option value="law">Law</option>
-          <option value="math">Math</option>
-          <option value="science">Science</option>
-          <option value="teaching">Teaching</option>
-        </select>
-        <select
-          name="courses"
-          id="courses2"
-          class="form-group__courses-select"
-          disabled
-        >
-          <option value="">Unselected</option>
-          <option value="art">Art</option>
-          <option value="back-end">Back-End</option>
-          <option value="bartending">Bartending</option>
-          <option value="culinary">Culinary</option>
-          <option value="english">English</option>
-          <option value="front-end">Front-End</option>
-          <option value="full-stack">Full-stack</option>
-          <option value="geography">Geography</option>
-          <option value="law">Law</option>
-          <option value="math">Math</option>
-          <option value="science">Science</option>
-          <option value="teaching">Teaching</option>
-        </select>
-        <select
-          name="courses"
-          id="courses3"
-          class="form-group__courses-select"
-          disabled
-        >
-          <option value="">Unselected</option>
-          <option value="art">Art</option>
-          <option value="back-end">Back-End</option>
-          <option value="bartending">Bartending</option>
-          <option value="culinary">Culinary</option>
-          <option value="english">English</option>
-          <option value="front-end">Front-End</option>
-          <option value="full-stack">Full-stack</option>
-          <option value="geography">Geography</option>
-          <option value="law">Law</option>
-          <option value="math">Math</option>
-          <option value="science">Science</option>
-          <option value="teaching">Teaching</option>
-        </select>
-      </div>
+        <div class="form-group">
+          <label for="courses">Select up to 3 courses: *</label>
+          <select
+            name="courses"
+            id="courses1"
+            class="form-group__courses-select"
+            required
+          >
+            <option value="">Unselected</option>
+            <option value="art">Art</option>
+            <option value="back-end">Back-End</option>
+            <option value="bartending">Bartending</option>
+            <option value="culinary">Culinary</option>
+            <option value="english">English</option>
+            <option value="front-end">Front-End</option>
+            <option value="full-stack">Full-stack</option>
+            <option value="geography">Geography</option>
+            <option value="law">Law</option>
+            <option value="math">Math</option>
+            <option value="science">Science</option>
+            <option value="teaching">Teaching</option>
+          </select>
+          <select
+            name="courses"
+            id="courses2"
+            class="form-group__courses-select"
+            disabled
+          >
+            <option value="">Unselected</option>
+            <option value="art">Art</option>
+            <option value="back-end">Back-End</option>
+            <option value="bartending">Bartending</option>
+            <option value="culinary">Culinary</option>
+            <option value="english">English</option>
+            <option value="front-end">Front-End</option>
+            <option value="full-stack">Full-stack</option>
+            <option value="geography">Geography</option>
+            <option value="law">Law</option>
+            <option value="math">Math</option>
+            <option value="science">Science</option>
+            <option value="teaching">Teaching</option>
+          </select>
+          <select
+            name="courses"
+            id="courses3"
+            class="form-group__courses-select"
+            disabled
+          >
+            <option value="">Unselected</option>
+            <option value="art">Art</option>
+            <option value="back-end">Back-End</option>
+            <option value="bartending">Bartending</option>
+            <option value="culinary">Culinary</option>
+            <option value="english">English</option>
+            <option value="front-end">Front-End</option>
+            <option value="full-stack">Full-stack</option>
+            <option value="geography">Geography</option>
+            <option value="law">Law</option>
+            <option value="math">Math</option>
+            <option value="science">Science</option>
+            <option value="teaching">Teaching</option>
+          </select>
+        </div>
 
-      <div class="form-group">
-        <label for="student-enrollment-year">Enrollment Year: *</label>
-        <select
-          name="student-enrollment-year"
-          id="student-enrollment-year"
-          required
-        >
-          <option value="">Unselected</option>
-          <option value="2025" name="student-enrollment-year">2025</option>
-          <option value="2026" name="student-enrollment-year">2026</option>
-          <option value="2027" name="student-enrollment-year">2027</option>
-        </select>
-      </div>
+        <div class="form-group">
+          <label for="student-enrollment-year">Enrollment Year: *</label>
+          <select
+            name="student-enrollment-year"
+            id="student-enrollment-year"
+            required
+          >
+            <option value="">Unselected</option>
+            <option value="2025" name="student-enrollment-year">2025</option>
+            <option value="2026" name="student-enrollment-year">2026</option>
+            <option value="2027" name="student-enrollment-year">2027</option>
+          </select>
+        </div>
 
-      <div class="form-group">
-        <label for="student-email">Email: *</label>
-        <input
-          type="email"
-          name="student-email"
-          id="student-email"
-          placeholder="email@email.com"
-          required
-        />
-      </div>
-      <div class="form-group form-group__buttons">
-        <button type="submit" class="form__add-student-instructor-button">
-          Add student
-        </button>
-        <button type="button" class="form__cancel-button">Cancel</button>
+        <div class="form-group">
+          <label for="student-email">Email: *</label>
+          <input
+            type="email"
+            name="student-email"
+            id="student-email"
+            placeholder="email@email.com"
+            required
+          />
+        </div>
+        <div class="form-group form-group__buttons">
+          <button type="submit" class="form__add-student-instructor-button">
+            Add student
+          </button>
+          <button type="button" class="form__cancel-button">Cancel</button>
+        </div>
       </div>
     </form>
 
