@@ -1,3 +1,26 @@
+header {
+  width: 100%;
+  height: auto;
+  background-color: #abfcfc;
+  padding: var(--spacing-small) var(--spacing-small);
+}
+
+h1 {
+  text-align: center;
+}
+
+.navbar {
+  display: flex;
+  gap: var(--spacing-medium);
+  align-items: center;
+  justify-content: center;
+  padding-top: var(--spacing-x-small);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 .students-list-container {
   width: 100%;
   display: flex;
