@@ -1,8 +1,9 @@
-import Person from "./person";
+import Person from "../core/personClass";
+
 class Instructor extends Person {
-  constructor(name, age, email) {
+  constructor(name, age, email, courses) {
     super(name, age, email);
-    // this.instructorId = instructorId;
+    this.courses = courses;
   }
 }
 
