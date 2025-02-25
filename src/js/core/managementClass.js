@@ -1,3 +1,7 @@
-// class Management {
-//   static this.add()=>{}
-// }
+class Management {
+  static add() {
+    console.log("Item added");
+  }
+}
+
+export default Management;
