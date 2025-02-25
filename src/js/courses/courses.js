@@ -1,7 +1,6 @@
-import instructorsList from "../instructors/instructorsList";
-import studentsList from "../students/studentsList";
-import coursesList from "./coursesList";
+import CourseManagement from "./coursesManagement";
 
-console.log(studentsList);
-console.log(instructorsList);
-console.log(coursesList);
+CourseManagement.addCourse("Film");
+CourseManagement.addCourse("TV");
+
+console.log(CourseManagement.coursesList);
