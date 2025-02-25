@@ -11,9 +11,9 @@
     <header>
       <h1>Student List:</h1>
       <nav>
-        <a href="./courseList.html">Course list</a>
-        <a href="./studentList.html">Student list</a>
-        <a href="./instructorList.html">Instructor list</a>
+        <a href="./coursePage.html">Course list</a>
+        <a href="./studentPage.html">Student list</a>
+        <a href="./instructorPage.html">Instructor list</a>
       </nav>
     </header>
     <main>
@@ -44,7 +44,12 @@
       </div>
       <div class="form-group">
         <label for="courses">Select up to 3 courses: *</label>
-        <select name="courses" id="courses1" class="form-group__courses-select" required>
+        <select
+          name="courses"
+          id="courses1"
+          class="form-group__courses-select"
+          required
+        >
           <option value="">Unselected</option>
           <option value="art">Art</option>
           <option value="back-end">Back-End</option>
@@ -59,7 +64,12 @@
           <option value="science">Science</option>
           <option value="teaching">Teaching</option>
         </select>
-        <select name="courses" id="courses2" class="form-group__courses-select" disabled>
+        <select
+          name="courses"
+          id="courses2"
+          class="form-group__courses-select"
+          disabled
+        >
           <option value="">Unselected</option>
           <option value="art">Art</option>
           <option value="back-end">Back-End</option>
@@ -74,7 +84,12 @@
           <option value="science">Science</option>
           <option value="teaching">Teaching</option>
         </select>
-        <select name="courses" id="courses3" class="form-group__courses-select" disabled>
+        <select
+          name="courses"
+          id="courses3"
+          class="form-group__courses-select"
+          disabled
+        >
           <option value="">Unselected</option>
           <option value="art">Art</option>
           <option value="back-end">Back-End</option>
@@ -101,7 +116,9 @@
         />
       </div>
       <div class="form-group form-group__buttons">
-        <button type="submit" class="form__add-student-instructor-button">Add student</button>
+        <button type="submit" class="form__add-student-instructor-button">
+          Add student
+        </button>
         <button type="button" class="form__cancel-button">Cancel</button>
       </div>
     </form>
