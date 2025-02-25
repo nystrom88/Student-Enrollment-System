@@ -1,0 +1,86 @@
+.students-list-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+.student-list {
+  width: 80%;
+  display: flex;
+  padding: 1rem;
+}
+
+.student-list__headings {
+  font-weight: bold;
+  background-color: rgb(201, 201, 201);
+  border-top-left-radius: 0.4rem;
+  border-top-right-radius: 0.4rem;
+}
+
+.student-list__name {
+  flex-basis: 30%;
+}
+
+.student-list__courses {
+  flex-basis: 30%;
+}
+
+.student-list__email {
+  flex-basis: 30%;
+}
+
+.student-list__tools {
+  flex-basis: 10%;
+}
+
+.add-student-instructor__button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 70px;
+  height: 70px;
+  border: 1px solid black;
+  border-radius: 0.4rem;
+}
+
+.add-student-instructor__button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.form__add-edit-student-instructor {
+  display: none;
+  /* display: flex; */
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  justify-self: center;
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  width: 50%;
+  min-width: 300px;
+}
+
+.form-group select,
+option,
+input {
+  padding: 0.4rem;
+}
+
+.form-group__buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.form-group__buttons button {
+  width: 150px;
+  height: 50px;
+}
