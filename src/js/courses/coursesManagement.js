@@ -6,14 +6,16 @@ class CourseManagement {
   static addCourse(courseName, students, instructor) {
     // Get courses from local storage
     // this.coursesList = JSON.parse(localStorage.getItem("coursesList")) || [];
+
     this.coursesList.push(new Course(courseName));
+    this.storeCourse(this.coursesList);
   }
 
   static updateCourse() {}
 
   static removeCourse() {}
 
-  static storeCourse() {
+  static storeCourse(courseList) {
     localStorage.setItem("coursesList", JSON.stringify(this.coursesList));
   }
 }
