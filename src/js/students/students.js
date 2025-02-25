@@ -1,18 +1,13 @@
-import StudentManagement from "./studentManagement.js";
+import StudentManagement from "./studentsManagement";
+
+document.addEventListener("DOMContentLoaded", () => {
+  StudentManagement.viewStudentList();
+});
 
 const formModal = document.querySelector(".form__add-edit-student-instructor");
-const addStudentInstructor = document.querySelector(
-  ".add-student-instructor__button"
-);
+const addStudentInstructor = document.querySelector(".add-student-instructor__button");
 const cancelButton = document.querySelector(".form__cancel-button");
 const coursesInput = document.querySelectorAll(".form-group__courses-select");
-
-// Runs the "viewStudentList" method if the specified html page is opened
-if (window.location.pathname.includes("studentList.html")) {
-  document.addEventListener("DOMContentLoaded", () => {
-    StudentManagement.viewStudentList();
-  });
-}
 
 formModal.addEventListener("submit", (e) => {
   e.preventDefault();
