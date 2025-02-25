@@ -1,10 +1,5 @@
-body {
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
+@import url(./base/reset.css);
+@import url(./base/variables.css);
+@import url(./base/layout.css);
 
-main {
-  width: 100%;
-}
+@import url(./page/studentPage.css);
