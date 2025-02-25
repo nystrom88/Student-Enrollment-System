@@ -1,10 +1,10 @@
-import Courses from "./coursesClass";
+import Course from "./courseClass";
 
 const coursesList = [
-  new Courses([], "", "Front-end"),
-  new Courses([], "", "Back-end"),
-  new Courses([], "", "UX"),
-  new Courses([], "", "Design"),
+  new Course("Front-end", [], ""),
+  new Course("Back-end", [], ""),
+  new Course("UX", [], ""),
+  new Course("Design", [], ""),
 ];
 
 export default coursesList;
