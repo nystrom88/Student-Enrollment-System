@@ -1,4 +1,4 @@
-import Person from "./person";
+import Person from "../core/personClass";
 
 class Student extends Person {
   constructor(name, age, email, studentId, enrollmentYear, courses) {

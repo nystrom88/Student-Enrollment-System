@@ -1,21 +1,4 @@
-// class Student extends Person {
-//   constructor(name, email, id, studentId, enrollmentYear, courses = []) {
-//     super(name, email, id);
-//     this.studentId = studentId;
-//     this.enrollmentYear = enrollmentYear;
-//     this.courses = courses;
-//   }
-
-//   viewStudentList() {}
-
-//   selectCourses() {}
-
-//   addStudent() {}
-
-//   editStudent() {}
-
-//   removeStudent() {}
-// }
+import Student from "./studentsClass";
 
 class StudentManagement {
   static viewStudentList() {
@@ -68,11 +51,11 @@ class StudentManagement {
       deleteButton.classList.add("tools__delete-button");
 
       // Adding content
-      listElementName.textContent = this.name;
-      listElementCourse1.textContent = this.courses[0];
-      listElementCourse2.textContent = this.courses[1];
-      listElementCourse3.textContent = this.courses[2];
-      listElementEmail.textContent = this.email;
+      listElementName.textContent = Student.name;
+      listElementCourse1.textContent = Student.courses[0];
+      listElementCourse2.textContent = Student.courses[1];
+      listElementCourse3.textContent = Student.courses[2];
+      listElementEmail.textContent = Student.email;
       editButton.textContent = "Edit";
       deleteButton.textContent = "Delete";
 
