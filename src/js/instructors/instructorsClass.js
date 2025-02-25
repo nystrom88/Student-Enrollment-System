@@ -1,8 +1,8 @@
 import Person from "./person";
 class Instructor extends Person {
-  constructor(name, age, email, instructorId) {
+  constructor(name, age, email) {
     super(name, age, email);
-    this.instructorId = instructorId;
+    // this.instructorId = instructorId;
   }
 }
 
