@@ -1,17 +1,19 @@
-import StudentManagement from "./studentsManagement";
+import StudentsManagement from "./studentsManagement";
 
 document.addEventListener("DOMContentLoaded", () => {
-  StudentManagement.viewStudentList();
+  StudentsManagement.viewStudentList();
 });
 
 const formModal = document.querySelector(".form__add-edit-student-instructor");
-const addStudentInstructor = document.querySelector(".add-student-instructor__button");
+const addStudentInstructor = document.querySelector(
+  ".add-student-instructor__button"
+);
 const cancelButton = document.querySelector(".form__cancel-button");
 const coursesInput = document.querySelectorAll(".form-group__courses-select");
 
 formModal.addEventListener("submit", (e) => {
   e.preventDefault();
-  StudentManagement.addStudent(personName, personCourses, personEmail);
+  StudentsManagement.addStudent(personName, personCourses, personEmail);
   formModal.reset();
   formModal.style.display = "none";
 });

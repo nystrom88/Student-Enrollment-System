@@ -2,4 +2,6 @@
 @import url(./base/variables.css);
 @import url(./base/layout.css);
 
+@import url(./page/coursePage.css);
 @import url(./page/studentPage.css);
+@import url(./page/instructorPage.css);
