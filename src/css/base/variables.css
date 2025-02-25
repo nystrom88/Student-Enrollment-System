@@ -1,0 +1,8 @@
+:root {
+  /* SPACING */
+  --spacing-x-small: 1rem;
+  --spacing-small: 2rem;
+  --spacing-medium: 3rem;
+  --spacing-large: 4rem;
+  --spacing-x-large: 6rem;
+}

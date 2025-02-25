@@ -1,3 +1,7 @@
+@font-face {
+  font-family: Mulish;
+  src: url(/public/assets/fonts/Mulish-Italic-VariableFont_wght.ttf);
+}
 body {
   width: 100%;
   min-height: 100vh;
@@ -7,4 +11,28 @@ body {
 
 main {
   width: 100%;
+}
+
+header {
+  width: 100%;
+  height: auto;
+  background-color: #abfcfc;
+  padding: var(--spacing-small) var(--spacing-small);
+  font-family: Mulish;
+}
+
+h1 {
+  text-align: center;
+}
+
+.navbar {
+  display: flex;
+  gap: var(--spacing-medium);
+  align-items: center;
+  justify-content: center;
+  padding-top: var(--spacing-x-small);
+}
+
+a:hover {
+  text-decoration: underline;
 }
