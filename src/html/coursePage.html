@@ -3,8 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/public/assets/icons/favicon.ico" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/public/assets/icons/favicon.ico"
+    />
     <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/page/coursePage.css" />
     <script type="module" src="../js/courses/courses.js"></script>
     <title>Course List</title>
   </head>
@@ -17,5 +22,29 @@
         <a href="./instructorPage.html">Instructor list</a>
       </nav>
     </header>
+    <main>
+      <section class="course-conatiner">
+        <ul class="course-list">
+          <div class="course-list__container">
+            <li class="course-title__course"><h2>FRONT-END</h2></li>
+            <li><button>🖊️</button></li>
+            <li><button>🗑️</button></li>
+          </div>
+
+          <div class="course-list__instructur">
+            <li><h3>Instructur: BOB</h3></li>
+          </div>
+
+          <div class="course-list__students">
+            <li><h4>Students:</h4></li>
+            <div>
+              <li><p>Clara, Mikkel, Kåre</p></li>
+              <li><p>20/30</p></li>
+            </div>
+          </div>
+        </ul>
+      </section>
+      <button class="edit-add-course__button">+</button>
+    </main>
   </body>
 </html>

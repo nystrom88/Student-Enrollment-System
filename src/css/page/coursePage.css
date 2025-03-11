@@ -1,0 +1,43 @@
+.course-conatiner {
+  font-family: Mulish;
+  padding: 1rem;
+}
+
+.course-list {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(201, 201, 201);
+  border-radius: 5px;
+  max-width: 250px;
+  height: 200px;
+  padding: 1rem;
+  justify-content: space-between;
+}
+
+.course-title__course {
+  flex-grow: 1;
+}
+
+.course-list__container {
+  display: flex;
+}
+.course-list__students {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-add-course__button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 70px;
+  height: 70px;
+  border: 1px solid black;
+  border-radius: 0.4rem;
+}
+
+button {
+  border: none;
+  background-color: rgb(201, 201, 201);
+  font-size: x-large;
+}
