@@ -3,11 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="/public/assets/icons/favicon.ico"
-    />
+    <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.ico" />
     <link rel="stylesheet" href="../css/styles.css" />
     <script type="module" src="../js/students/students.js"></script>
     <title>Student List</title>
@@ -65,8 +61,8 @@
           <label for="courses">Select up to 3 courses: *</label>
           <select
             name="courses"
-            id="courses1"
-            class="form-group__courses-select"
+            id="course1"
+            class="form__student-courses-select"
             required
           >
             <option value="">Unselected</option>
@@ -85,8 +81,8 @@
           </select>
           <select
             name="courses"
-            id="courses2"
-            class="form-group__courses-select"
+            id="course2"
+            class="form__student-courses-select"
             disabled
           >
             <option value="">Unselected</option>
@@ -105,8 +101,8 @@
           </select>
           <select
             name="courses"
-            id="courses3"
-            class="form-group__courses-select"
+            id="course3"
+            class="form__student-courses-select"
             disabled
           >
             <option value="">Unselected</option>
@@ -131,6 +127,7 @@
             name="student-enrollment-year"
             id="student-enrollment-year"
             required
+            class="form__student-enrollment-year-select"
           >
             <option value="">Unselected</option>
             <option value="2025" name="student-enrollment-year">2025</option>
@@ -145,6 +142,7 @@
             type="email"
             name="student-email"
             id="student-email"
+            class="form__student-email-input"
             placeholder="email@email.com"
             required
           />

@@ -7,7 +7,7 @@
   font-family: Mulish;
 }
 
-.student-list {
+.student-list, .student-list__list {
   width: 80%;
   display: flex;
   padding: 1rem;
@@ -107,3 +107,14 @@ input {
   height: 50px;
   font-family: Mulish;
 }
+
+.student-list__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.student-container {
+  display: flex;
+  width: 100%;
+}
+
