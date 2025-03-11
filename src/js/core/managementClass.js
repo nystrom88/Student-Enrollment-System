@@ -1,7 +1,11 @@
-class Management {
-  static add() {
-    console.log("Item added");
-  }
-}
+// Delete whole file?
 
-export default Management;
+// class Management {
+//   static addToLocalStorage(localStorageKey, value) {
+//     localStorage.setItem(localStorageKey, JSON.stringify(value));
+//   }
+
+//   static removeFromLocalStorage(key) {}
+// }
+
+// export default Management;
