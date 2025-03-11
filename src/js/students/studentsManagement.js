@@ -2,16 +2,15 @@ import Student from "./studentsClass";
 import studentsList from "./studentsList";
 
 class StudentManagement {
-  static viewStudentList() {
+  static viewStudentsList() {
     // Fetches data from the local storage or creates an Empty array if there is nothing stored
     // const studentList = JSON.parse(localStorage.getItem("student-list")) || [];
 
-    const studentList = studentsList;
+    const listContainer = document.querySelector(".student-list__list");
+    listContainer.innerHTML = "";
 
-    studentList.forEach((student, i) => {
+    studentsList.forEach((student, i) => {
       // Create/select Elements
-      const listContainer = document.querySelector(".student-list__list");
-
       const listElement = document.createElement("li");
       const studentContainer = document.createElement("div");
       const listElementName = document.createElement("li");
@@ -82,8 +81,8 @@ class StudentManagement {
     studentEnrollmentYear,
     studentCourses
   ) {
-    // Update studentList and local storage with newly added Student
-    const studentList = JSON.parse(localStorage.getItem("student-list"));
+    // Update studentsList and local storage with newly added Student
+    const studentsList = JSON.parse(localStorage.getItem("student-list")) || [];
     const newStudent = new Student(
       studentName.value,
       studentAge.value,
@@ -92,9 +91,11 @@ class StudentManagement {
       studentCourses.value
     );
 
+    console.log(newStudent);
+
     studentsList.push(newStudent);
-    localStorage.setItem("student-list", JSON.stringify(studentList));
-    this.viewStudentList();
+    localStorage.setItem("student-list", JSON.stringify(studentsList));
+    this.viewStudentsList();
   }
 
   static editStudent() {}

@@ -16,7 +16,7 @@ main {
 header {
   width: 100%;
   height: auto;
-  background-color: #abfcfc;
+  background-color: var(--background-color);
   padding: var(--spacing-small) var(--spacing-small);
   font-family: Mulish;
 }

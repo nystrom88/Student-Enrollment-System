@@ -2,7 +2,7 @@ import StudentsManagement from "./studentsManagement";
 import Student from "./studentsClass";
 
 document.addEventListener("DOMContentLoaded", () => {
-  StudentsManagement.viewStudentList();
+  StudentsManagement.viewStudentsList();
 });
 
 const formModal = document.querySelector(".form__add-edit-student-instructor");
@@ -10,7 +10,7 @@ const addStudentInstructor = document.querySelector(
   ".add-student-instructor__button"
 );
 const cancelButton = document.querySelector(".form__cancel-button");
-const coursesInput = document.querySelectorAll(".form-group__courses-select");
+const coursesInput = document.querySelectorAll(".form__student-courses-select");
 
 // Form
 formModal.addEventListener("submit", (e) => {
@@ -20,11 +20,18 @@ formModal.addEventListener("submit", (e) => {
   const studentAge = document.querySelector(".form__student-age-input");
   const studentEmail = document.querySelector(".form__student-email-input");
   const studentEnrollmentYear = document.querySelector(
-    ".form__enrollment-year-select"
+    ".form__student-enrollment-year-select"
   );
-  const studentCourses = document.querySelector(
-    ".form__student-courses-select"
-  );
+
+  const studentCourse1 = document.querySelector("#course1");
+  const studentCourse2 = document.querySelector("#course2");
+  const studentCourse3 = document.querySelector("#course3");
+
+  const studentCourses = [
+    studentCourse1.value,
+    studentCourse2.value,
+    studentCourse3.value,
+  ];
 
   StudentsManagement.addStudent(
     studentName,
