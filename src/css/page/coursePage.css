@@ -59,3 +59,16 @@ button {
   background-color: rgb(201, 201, 201);
   font-size: x-large;
 }
+.add-course__button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 70px;
+  height: 70px;
+  border: 1px solid black;
+  border-radius: 0.4rem;
+}
+
+.add-course__button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
