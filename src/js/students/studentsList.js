@@ -17,4 +17,4 @@ const studentsList = [
 
 export default studentsList;
 
-console.log(coursesList[1]);
+console.log(studentsList);
