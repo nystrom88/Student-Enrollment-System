@@ -6,12 +6,23 @@
 .course-list {
   display: flex;
   flex-direction: column;
-  background-color: rgb(201, 201, 201);
+  /* background-color: rgb(201, 201, 201); */
   border-radius: 5px;
-  max-width: 250px;
-  height: 200px;
+  max-width: 350px;
+  gap: var(--spacing-x-small);
   padding: 1rem;
   justify-content: space-between;
+}
+
+.course-list__item {
+  display: flex;
+  background-color: rgb(201, 201, 201);
+  border-radius: 5px;
+  padding: var(--spacing-small);
+}
+
+.course-list__text-container {
+  flex-basis: 80%;
 }
 
 .course-title__course {
@@ -24,6 +35,13 @@
 .course-list__students {
   display: flex;
   flex-direction: column;
+}
+
+.course-list__buttons-container {
+  flex-basis: 20%;
+  display: flex;
+  justify-content: end;
+  align-items: start;
 }
 
 .edit-add-course__button {
