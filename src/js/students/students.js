@@ -12,9 +12,27 @@ const addStudentInstructor = document.querySelector(
 const cancelButton = document.querySelector(".form__cancel-button");
 const coursesInput = document.querySelectorAll(".form-group__courses-select");
 
+// Form
 formModal.addEventListener("submit", (e) => {
   e.preventDefault();
-  StudentsManagement.addStudent();
+
+  const studentName = document.querySelector(".form__student-name-input");
+  const studentAge = document.querySelector(".form__student-age-input");
+  const studentEmail = document.querySelector(".form__student-email-input");
+  const studentEnrollmentYear = document.querySelector(
+    ".form__enrollment-year-select"
+  );
+  const studentCourses = document.querySelector(
+    ".form__student-courses-select"
+  );
+
+  StudentsManagement.addStudent(
+    studentName,
+    studentAge,
+    studentEmail,
+    studentEnrollmentYear,
+    studentCourses
+  );
   formModal.reset();
   formModal.style.display = "none";
 });
