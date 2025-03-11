@@ -7,7 +7,7 @@ class CourseManagement {
     this.coursesList = JSON.parse(localStorage.getItem("coursesList")) || [];
     this.coursesList.push(new Course(courseName, students, instructor, maxStudents));
     localStorage.setItem("coursesList", JSON.stringify(this.coursesList));
-    // Re-render interface
+    // Re-render interface //
   }
 
   static editCourse(courseId) {
