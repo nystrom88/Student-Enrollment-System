@@ -1,16 +1,21 @@
 import Student from "./studentsClass";
+// import studentsList from "./studentsList";
 
 class StudentManagement {
-  static viewStudentList() {
+  static viewStudentsList() {
     // Fetches data from the local storage or creates an Empty array if there is nothing stored
-    const studentList = JSON.parse(localStorage.getItem("student-list")) || [];
+    // const studentList = JSON.parse(localStorage.getItem("student-list")) || [];
 
-    studentList.forEach((student) => {
+    const listContainer = document.querySelector(".student-list__list");
+    listContainer.innerHTML = "";
+
+    const studentsList = JSON.parse(localStorage.getItem("student-list")) || [];
+    console.log(studentsList);
+
+    studentsList.forEach((student, i) => {
       // Create/select Elements
-      const listContainer = document.querySelector(".student-list-container");
-
+      const listElement = document.createElement("li");
       const studentContainer = document.createElement("div");
-      const list = document.createElement("ul");
       const listElementName = document.createElement("li");
       const listCourses = document.createElement("ul");
       const listElementCourse1 = document.createElement("li");
@@ -22,8 +27,8 @@ class StudentManagement {
       const deleteButton = document.createElement("button");
 
       // Appending
-      listContainer.append(list);
-      list.append(studentContainer);
+      listContainer.append(listElement);
+      listElement.append(studentContainer);
       studentContainer.append(
         listElementName,
         listCourses,
@@ -39,7 +44,7 @@ class StudentManagement {
 
       // Applying classes
       studentContainer.classList.add("student-container");
-      list.classList.add("student-list student-list-container");
+      listElement.classList.add("student-list", "students-list-container");
       listElementName.classList.add("student-list__name");
       listCourses.classList.add("student-list__courses");
       listElementCourse1.classList.add("student-list__course1");
@@ -51,11 +56,11 @@ class StudentManagement {
       deleteButton.classList.add("tools__delete-button");
 
       // Adding content
-      listElementName.textContent = Student.name;
-      listElementCourse1.textContent = Student.courses[0];
-      listElementCourse2.textContent = Student.courses[1];
-      listElementCourse3.textContent = Student.courses[2];
-      listElementEmail.textContent = Student.email;
+      listElementName.textContent = studentsList[i].name;
+      listElementCourse1.textContent = studentsList[i].courses[0];
+      listElementCourse2.textContent = studentsList[i].courses[1];
+      listElementCourse3.textContent = studentsList[i].courses[2];
+      listElementEmail.textContent = studentsList[i].email;
       editButton.textContent = "Edit";
       deleteButton.textContent = "Delete";
 
@@ -64,21 +69,43 @@ class StudentManagement {
       });
 
       deleteButton.addEventListener("click", () => {
-        // Pop asking to delete student with id ^
+        this.removeStudent();
       });
     });
   }
-  static addStudent() {
-    // Update studentList and local storage with newly added Student
-    confirmAddButton.addStudent("click", () => {
-      const studentList = JSON.parse(localStorage.getItem("student-list"));
-      studentList.push(Student);
-      localStorage.setItem("student-list", JSON.stringify(studentList));
-      this.viewStudentList();
-    });
+
+  static addStudent(
+    studentName,
+    studentAge,
+    studentEmail,
+    studentEnrollmentYear,
+    studentCourses
+  ) {
+    // Update studentsList and local storage with newly added Student
+    const studentsList = JSON.parse(localStorage.getItem("student-list"));
+    const newStudent = new Student(
+      studentName.value,
+      studentAge.value,
+      studentEmail.value,
+      studentEnrollmentYear.value,
+      studentCourses
+    );
+    console.log(studentCourses.value);
+
+    studentsList.push(newStudent);
+    localStorage.setItem("student-list", JSON.stringify(studentsList));
+    this.viewStudentsList();
   }
+
   static editStudent() {}
-  static removeStudent() {}
+  static removeStudent(studentId) {
+    const studentsList = JSON.parse(localStorage.getItem("student-list"));
+    const filteredStudents = studentsList.filter(
+      (student) => student.studentId !== studentId
+    );
+    localStorage.setItem("student-list", JSON.stringify(filteredStudents));
+    this.viewStudentsList();
+  }
 }
 
 export default StudentManagement;
