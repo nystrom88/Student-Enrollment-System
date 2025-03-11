@@ -1,0 +1,40 @@
+.delete-modal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-x-small);
+
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.delete-modal__container {
+  padding: var(--spacing-medium);
+  border-radius: var(--border-radius-medium);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-x-small);
+
+  background-color: var(--background-color);
+}
+
+.delete-modal__message {
+  font-size: var(--font-size-medium);
+}
+
+.delete-modal__buttons {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-x-small);
+}
+
+.delete-modal__confirm-button,
+.delete-modal__cancel-button {
+  padding: var(--spacing-x-small);
+}
