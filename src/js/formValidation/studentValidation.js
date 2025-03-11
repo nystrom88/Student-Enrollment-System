@@ -11,9 +11,12 @@ class StudentValidation extends MainValidation {
     },
     { name: "student-email", message: "Please Enter Your Email" },
   ];
+  static logMe() {
+    console.log("heyo");
+  }
 
-  validateStudent() {
-    StudentValidation.validateForm(this.fieldsToValidate);
+  static validateStudent(event) {
+    StudentValidation.validateForm(this.fieldsToValidate, event);
     // this.validateForm(fieldsToValidate);
   }
 }

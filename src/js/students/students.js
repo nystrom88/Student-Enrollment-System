@@ -3,7 +3,7 @@ import Student from "./studentsClass";
 import StudentValidation from "../formValidation/studentValidation";
 
 document.addEventListener("DOMContentLoaded", () => {
-  StudentsManagement.viewStudentList();
+  StudentsManagement.viewStudentsList();
 });
 
 const formModal = document.querySelector(".form__add-edit-student-instructor");
@@ -11,12 +11,37 @@ const addStudentInstructor = document.querySelector(
   ".add-student-instructor__button"
 );
 const cancelButton = document.querySelector(".form__cancel-button");
-const coursesInput = document.querySelectorAll(".form-group__courses-select");
+const coursesInput = document.querySelectorAll(".form__student-courses-select");
 
+// Form
 formModal.addEventListener("submit", (e) => {
   e.preventDefault();
-  StudentsManagement.addStudent();
-  StudentValidation.validateStudent();
+  StudentValidation.validateStudent(e);
+
+  const studentName = document.querySelector(".form__student-name-input");
+  const studentAge = document.querySelector(".form__student-age-input");
+  const studentEmail = document.querySelector(".form__student-email-input");
+  const studentEnrollmentYear = document.querySelector(
+    ".form__student-enrollment-year-select"
+  );
+
+  const studentCourse1 = document.querySelector("#course1");
+  const studentCourse2 = document.querySelector("#course2");
+  const studentCourse3 = document.querySelector("#course3");
+
+  const studentCourses = [
+    studentCourse1.value,
+    studentCourse2.value,
+    studentCourse3.value,
+  ];
+
+  StudentsManagement.addStudent(
+    studentName,
+    studentAge,
+    studentEmail,
+    studentEnrollmentYear,
+    studentCourses
+  );
   formModal.reset();
   formModal.style.display = "none";
 });

@@ -3,12 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="/public/assets/icons/favicon.ico"
-    />
+    <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.ico" />
     <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/page/validation.css" />
     <script type="module" src="../js/students/students.js"></script>
     <title>Student List</title>
   </head>
@@ -59,7 +56,7 @@
             min="1"
             class="form__student-age-input"
           />
-          <p class="form__validation-message form__age-message"></p>
+          <p class="form__validation-message form__student-age-message"></p>
         </div>
 
         <div class="form-group">
@@ -67,7 +64,7 @@
           <select
             name="courses"
             id="course1"
-            class="form-group__courses-select"
+            class="form__student-courses-select"
           >
             <option value="">Unselected</option>
             <option value="art">Art</option>
@@ -83,12 +80,12 @@
             <option value="science">Science</option>
             <option value="teaching">Teaching</option>
           </select>
-          <p class="form__validation-message form__courses-message-first"></p>
+          <p class="form__validation-message form__student-course-message"></p>
 
           <select
             name="courses"
             id="course2"
-            class="form-group__courses-select"
+            class="form__student-courses-select"
             disabled
           >
             <option value="">Unselected</option>
@@ -105,12 +102,12 @@
             <option value="science">Science</option>
             <option value="teaching">Teaching</option>
           </select>
-          <p class="form__validation-message form__courses-message-second"></p>
+          <p class="form__validation-message form__student-course-message"></p>
 
           <select
             name="courses"
             id="course3"
-            class="form-group__courses-select"
+            class="form__student-courses-select"
             disabled
           >
             <option value="">Unselected</option>
@@ -127,18 +124,24 @@
             <option value="science">Science</option>
             <option value="teaching">Teaching</option>
           </select>
-          <p class="form__validation-message form__courses-message-third"></p>
+          <p class="form__validation-message form__course1-message"></p>
         </div>
 
         <div class="form-group">
           <label for="student-enrollment-year">Enrollment Year: *</label>
-          <select name="student-enrollment-year" id="student-enrollment-year">
+          <select
+            name="student-enrollment-year"
+            id="student-enrollment-year"
+            class="form__student-enrollment-year-select"
+          >
             <option value="">Unselected</option>
             <option value="2025" name="student-enrollment-year">2025</option>
             <option value="2026" name="student-enrollment-year">2026</option>
             <option value="2027" name="student-enrollment-year">2027</option>
           </select>
-          <p class="form__validation-message form__enrollment-year-message"></p>
+          <p
+            class="form__validation-message form__student-enrollment-year-message"
+          ></p>
         </div>
 
         <div class="form-group">
@@ -147,9 +150,10 @@
             type="email"
             name="student-email"
             id="student-email"
+            class="form__student-email-input"
             placeholder="email@email.com"
           />
-          <p class="form__validation-message form__email-message"></p>
+          <p class="form__validation-message form__student-email-message"></p>
         </div>
 
         <div class="form-group form-group__buttons">
