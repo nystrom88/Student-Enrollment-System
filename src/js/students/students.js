@@ -1,5 +1,6 @@
 import StudentsManagement from "./studentsManagement";
 import Student from "./studentsClass";
+import StudentValidation from "../formValidation/studentValidation";
 
 document.addEventListener("DOMContentLoaded", () => {
   StudentsManagement.viewStudentList();
@@ -15,6 +16,7 @@ const coursesInput = document.querySelectorAll(".form-group__courses-select");
 formModal.addEventListener("submit", (e) => {
   e.preventDefault();
   StudentsManagement.addStudent();
+  StudentValidation.validateStudent();
   formModal.reset();
   formModal.style.display = "none";
 });

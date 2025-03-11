@@ -45,9 +45,10 @@
             minlength="1"
             maxlength="50"
             class="form__student-name-input"
-            required
           />
+          <p class="form__validation-message form__student-name-message"></p>
         </div>
+
         <div class="form-group">
           <label for="student-age">Age: *</label>
           <input
@@ -57,17 +58,16 @@
             placeholder="Enter your age"
             min="1"
             class="form__student-age-input"
-            required
           />
+          <p class="form__validation-message form__age-message"></p>
         </div>
 
         <div class="form-group">
           <label for="courses">Select up to 3 courses: *</label>
           <select
             name="courses"
-            id="courses1"
+            id="course1"
             class="form-group__courses-select"
-            required
           >
             <option value="">Unselected</option>
             <option value="art">Art</option>
@@ -83,9 +83,11 @@
             <option value="science">Science</option>
             <option value="teaching">Teaching</option>
           </select>
+          <p class="form__validation-message form__courses-message-first"></p>
+
           <select
             name="courses"
-            id="courses2"
+            id="course2"
             class="form-group__courses-select"
             disabled
           >
@@ -103,9 +105,11 @@
             <option value="science">Science</option>
             <option value="teaching">Teaching</option>
           </select>
+          <p class="form__validation-message form__courses-message-second"></p>
+
           <select
             name="courses"
-            id="courses3"
+            id="course3"
             class="form-group__courses-select"
             disabled
           >
@@ -123,20 +127,18 @@
             <option value="science">Science</option>
             <option value="teaching">Teaching</option>
           </select>
+          <p class="form__validation-message form__courses-message-third"></p>
         </div>
 
         <div class="form-group">
           <label for="student-enrollment-year">Enrollment Year: *</label>
-          <select
-            name="student-enrollment-year"
-            id="student-enrollment-year"
-            required
-          >
+          <select name="student-enrollment-year" id="student-enrollment-year">
             <option value="">Unselected</option>
             <option value="2025" name="student-enrollment-year">2025</option>
             <option value="2026" name="student-enrollment-year">2026</option>
             <option value="2027" name="student-enrollment-year">2027</option>
           </select>
+          <p class="form__validation-message form__enrollment-year-message"></p>
         </div>
 
         <div class="form-group">
@@ -146,10 +148,12 @@
             name="student-email"
             id="student-email"
             placeholder="email@email.com"
-            required
           />
+          <p class="form__validation-message form__email-message"></p>
         </div>
+
         <div class="form-group form-group__buttons">
+          <p class="validation-message"></p>
           <button type="submit" class="form__add-student-instructor-button">
             Add student
           </button>
