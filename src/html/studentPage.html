@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.ico" />
     <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/page/validation.css" />
     <script type="module" src="../js/students/students.js"></script>
     <title>Student List</title>
   </head>
@@ -42,7 +43,9 @@
             maxlength="50"
             class="form__student-name-input"
           />
+          <p class="form__validation-message form__student-name-message"></p>
         </div>
+
         <div class="form-group">
           <label for="student-age">Age: *</label>
           <input
@@ -53,6 +56,7 @@
             min="1"
             class="form__student-age-input"
           />
+          <p class="form__validation-message form__student-age-message"></p>
         </div>
 
         <div class="form-group">
@@ -76,6 +80,8 @@
             <option value="science">Science</option>
             <option value="teaching">Teaching</option>
           </select>
+          <p class="form__validation-message form__student-course-message"></p>
+
           <select
             name="courses"
             id="course2"
@@ -96,6 +102,8 @@
             <option value="science">Science</option>
             <option value="teaching">Teaching</option>
           </select>
+          <p class="form__validation-message form__student-course-message"></p>
+
           <select
             name="courses"
             id="course3"
@@ -116,6 +124,7 @@
             <option value="science">Science</option>
             <option value="teaching">Teaching</option>
           </select>
+          <p class="form__validation-message form__course1-message"></p>
         </div>
 
         <div class="form-group">
@@ -130,6 +139,9 @@
             <option value="2026" name="student-enrollment-year">2026</option>
             <option value="2027" name="student-enrollment-year">2027</option>
           </select>
+          <p
+            class="form__validation-message form__student-enrollment-year-message"
+          ></p>
         </div>
 
         <div class="form-group">
@@ -141,8 +153,11 @@
             class="form__student-email-input"
             placeholder="email@email.com"
           />
+          <p class="form__validation-message form__student-email-message"></p>
         </div>
+
         <div class="form-group form-group__buttons">
+          <p class="validation-message"></p>
           <button type="submit" class="form__add-student-instructor-button">
             Add student
           </button>
