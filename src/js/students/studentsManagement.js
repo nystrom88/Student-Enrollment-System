@@ -82,7 +82,7 @@ class StudentManagement {
     studentCourses
   ) {
     // Update studentsList and local storage with newly added Student
-    const studentsList = JSON.parse(localStorage.getItem("student-list"));
+    const studentsList = JSON.parse(localStorage.getItem("student-list")) || [];
     const newStudent = new Student(
       studentName.value,
       studentAge.value,
@@ -99,7 +99,7 @@ class StudentManagement {
 
   static editStudent() {}
   static removeStudent(studentId) {
-    const studentsList = JSON.parse(localStorage.getItem("student-list"));
+    const studentsList = JSON.parse(localStorage.getItem("student-list")) || [];
     const filteredStudents = studentsList.filter(
       (student) => student.studentId !== studentId
     );

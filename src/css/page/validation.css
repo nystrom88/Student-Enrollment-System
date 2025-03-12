@@ -1,0 +1,9 @@
+.form__validation-message {
+  display: none;
+  text-align: center;
+  color: red;
+  min-height: 32px;
+}
+.form__invalid-input {
+  border: 3px solid red;
+}
