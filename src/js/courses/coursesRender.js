@@ -1,7 +1,14 @@
+import Course from "./courseClass";
+import CourseManagement from "./coursesManagement";
+
 class UICourses {
-  static renderCourses(courseList) {
-    const courseListElement = document.querySelector(".course-list");
-    courseList.forEach((course) => {
+  static courseForm = document.querySelector(".form__add-edit-course");
+
+  static renderCourses(coursesList) {
+    const coursesListElement = document.querySelector(".course-list");
+    coursesListElement.innerHTML = "";
+
+    coursesList.forEach((course) => {
       // Step 1: Create Elements
       const li = document.createElement("li");
       const textContainer = document.createElement("div");
@@ -42,7 +49,7 @@ class UICourses {
       deleteButton.textContent = "🗑️";
 
       // Step 4: Append Elements Together
-      courseListElement.append(li);
+      coursesListElement.append(li);
       li.append(textContainer, buttonsContainer);
       textContainer.append(container, instructorContainer, studentsContainer);
       container.append(title);
@@ -50,7 +57,47 @@ class UICourses {
       studentsContainer.append(studentsTitle, studentsDetails);
       studentsDetails.append(studentNames, maxStudentsInfo);
       buttonsContainer.append(editButton, deleteButton);
+
+      // Event listeners
+      deleteButton.addEventListener("click", () => {
+        //
+        CourseManagement.removeCourse();
+      });
     });
+  }
+
+  static initAddEditCourseForm() {
+    const addCourseButton = document.querySelector(".add-course__button");
+    const formCancelButton = document.querySelector(".form__cancel-button");
+
+    addCourseButton.addEventListener("click", () => {
+      this.courseForm.classList.add("form__add-edit-course--show");
+    });
+
+    formCancelButton.addEventListener("click", () => {
+      this.courseForm.classList.remove("form__add-edit-course--show");
+      this.courseForm.reset();
+    });
+  }
+
+  static addCourse() {
+    const courseName = document.querySelector(".form__course-name-input");
+    const courseMaxStudent = document.querySelector(".form__course-max-students-input");
+
+    this.courseForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      // Validate inputs
+
+      const courseInstance = new Course(courseName.value, courseMaxStudent.value);
+      CourseManagement.addCourse(courseInstance);
+    });
+  }
+
+  static init() {
+    this.renderCourses(CourseManagement.getCourses());
+    this.initAddEditCourseForm();
+    this.addCourse();
   }
 }
 

@@ -1,13 +1,17 @@
-import Course from "./courseClass";
+import UICourses from "./coursesRender";
 
 class CourseManagement {
   static coursesList = [];
 
-  static addCourse(courseName, students, instructor, maxStudents) {
+  static getCourses() {
+    return JSON.parse(localStorage.getItem("coursesList")) || [];
+  }
+
+  static addCourse(courseInstance) {
     this.coursesList = JSON.parse(localStorage.getItem("coursesList")) || [];
-    this.coursesList.push(new Course(courseName, students, instructor, maxStudents));
+    this.coursesList.push(courseInstance);
     localStorage.setItem("coursesList", JSON.stringify(this.coursesList));
-    // Re-render interface //
+    UICourses.renderCourses(this.coursesList);
   }
 
   static editCourse(courseId) {
