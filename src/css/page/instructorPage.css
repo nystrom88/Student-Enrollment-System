@@ -1,0 +1,125 @@
+.instructor-list-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0;
+  font-family: Mulish;
+}
+
+.instructor-list,
+.instructor-list__list {
+  width: 80%;
+  display: flex;
+  padding: 1rem;
+}
+
+.instructor-list__headings {
+  font-weight: bold;
+  background-color: rgb(201, 201, 201);
+  border-top-left-radius: 0.4rem;
+  border-top-right-radius: 0.4rem;
+}
+
+.instructor-list__name {
+  flex-basis: 30%;
+}
+
+.instructor-list__courses {
+  flex-basis: 30%;
+}
+
+.instructor-list__email {
+  flex-basis: 30%;
+}
+
+.instructor-list__tools {
+  flex-basis: 10%;
+}
+
+.tools__edit-button,
+.tools__delete-button {
+  background-color: white;
+}
+
+.add-student-instructor__button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 70px;
+  height: 70px;
+  border: 1px solid black;
+  border-radius: 0.4rem;
+}
+
+.add-student-instructor__button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.form__add-edit-student-instructor {
+  display: none;
+  /* display: flex; */
+  position: fixed;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  justify-self: center;
+  width: 100%;
+  height: 100%;
+  font-family: Mulish;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.form-outer-container {
+  min-width: 360px;
+  width: 30%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-x-small);
+  padding: var(--spacing-x-small);
+  background-color: var(--background-color);
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--border-radius-medium);
+  margin: var(--spacing-medium) 0;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  width: 50%;
+  min-width: 300px;
+}
+
+.form-group select,
+option,
+input {
+  padding: 0.4rem;
+}
+
+.form-group__buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.form-group__buttons button {
+  width: 150px;
+  height: 50px;
+  font-family: Mulish;
+}
+
+.instructor-list__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.instructor-container {
+  display: flex;
+  width: 100%;
+}

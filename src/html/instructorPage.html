@@ -3,11 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="/assets/icons/favicon.ico"
-    />
+    <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.ico" />
     <link rel="stylesheet" href="../css/styles.css" />
     <script type="module" src="../js/instructors/instructors.js"></script>
     <title>Instructor List</title>
@@ -21,5 +17,131 @@
         <a href="./instructorPage.html">Instructor list</a>
       </nav>
     </header>
+    <main>
+      <span class="instructor-list-container">
+        <ul class="instructor-list student-list__headings">
+          <li class="instructor-list__name">Instructor Name:</li>
+          <li class="instructor-list__courses">Chosen Courses:</li>
+          <li class="instructor-list__email">Email:</li>
+        </ul>
+        <ul class="instructor-list__list instructor-list__list-container"></ul>
+      </span>
+    </main>
+
+    <!-- Form Modal-->
+    <form class="form__add-edit-student-instructor">
+      <div class="form-outer-container">
+        <div class="form-group">
+          <label for="instructor-name">Full name: *</label>
+          <input
+            type="text"
+            name="instructor-name"
+            id="instructor-name"
+            placeholder="Enter your name"
+            minlength="1"
+            maxlength="50"
+            class="form__instructor-name-input"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="instructor-age">Age: *</label>
+          <input
+            type="number"
+            name="instructor-age"
+            id="instructor-age"
+            placeholder="Enter your age"
+            min="1"
+            class="form__instructor-age-input"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="courses">Select up to 3 courses: *</label>
+          <select
+            name="courses"
+            id="course1"
+            class="form__instructor-courses-select"
+            required
+          >
+            <option value="">Unselected</option>
+            <option value="art">Art</option>
+            <option value="back-end">Back-End</option>
+            <option value="bartending">Bartending</option>
+            <option value="culinary">Culinary</option>
+            <option value="english">English</option>
+            <option value="front-end">Front-End</option>
+            <option value="full-stack">Full-stack</option>
+            <option value="geography">Geography</option>
+            <option value="law">Law</option>
+            <option value="math">Math</option>
+            <option value="science">Science</option>
+            <option value="teaching">Teaching</option>
+          </select>
+          <select
+            name="courses"
+            id="course2"
+            class="form__instructor-courses-select"
+            disabled
+          >
+            <option value="">Unselected</option>
+            <option value="art">Art</option>
+            <option value="back-end">Back-End</option>
+            <option value="bartending">Bartending</option>
+            <option value="culinary">Culinary</option>
+            <option value="english">English</option>
+            <option value="front-end">Front-End</option>
+            <option value="full-stack">Full-stack</option>
+            <option value="geography">Geography</option>
+            <option value="law">Law</option>
+            <option value="math">Math</option>
+            <option value="science">Science</option>
+            <option value="teaching">Teaching</option>
+          </select>
+          <select
+            name="courses"
+            id="course3"
+            class="form__instructor-courses-select"
+            disabled
+          >
+            <option value="">Unselected</option>
+            <option value="art">Art</option>
+            <option value="back-end">Back-End</option>
+            <option value="bartending">Bartending</option>
+            <option value="culinary">Culinary</option>
+            <option value="english">English</option>
+            <option value="front-end">Front-End</option>
+            <option value="full-stack">Full-stack</option>
+            <option value="geography">Geography</option>
+            <option value="law">Law</option>
+            <option value="math">Math</option>
+            <option value="science">Science</option>
+            <option value="teaching">Teaching</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="instructor-email">Email: *</label>
+          <input
+            type="email"
+            name="instructor-email"
+            id="instructor-email"
+            class="form__instructor-email-input"
+            placeholder="email@email.com"
+            required
+          />
+        </div>
+        <div class="form-group form-group__buttons">
+          <button type="submit" class="form__add-student-instructor-button">
+            Add student
+          </button>
+          <button type="button" class="form__cancel-button">Cancel</button>
+        </div>
+      </div>
+    </form>
+
+    <!-- Add new student/instructor button -->
+    <button class="add-student-instructor__button">+</button>
   </body>
 </html>
