@@ -75,7 +75,7 @@
 button {
   border: none;
   background-color: rgb(201, 201, 201);
-  font-size: x-large;
+  font-size: large;
 }
 .add-course__button {
   position: fixed;

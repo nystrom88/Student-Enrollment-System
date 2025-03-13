@@ -1,5 +1,6 @@
 import InstructorsManagement from "./instructorsManagement";
 import Instructor from "./instructorsClass";
+import InstructorValidation from "../formValidation/instructorValidation";
 
 document.addEventListener("DOMContentLoaded", () => {
   InstructorsManagement.viewInstructorsList();
@@ -18,7 +19,9 @@ const coursesInput = document.querySelectorAll(
 formModal.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  //   Valiadtion HERE
+  if (!InstructorValidation.validateInstructor()) {
+    return;
+  }
 
   const instructorName = document.querySelector(".form__instructor-name-input");
   const instructorAge = document.querySelector(".form__instructor-age-input");
