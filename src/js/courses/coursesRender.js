@@ -1,3 +1,4 @@
+import CourseValidation from "../formValidation/courseValidation";
 import Course from "./courseClass";
 import CourseManagement from "./coursesManagement";
 
@@ -82,14 +83,22 @@ class UICourses {
 
   static addCourse() {
     const courseName = document.querySelector(".form__course-name-input");
-    const courseMaxStudent = document.querySelector(".form__course-max-students-input");
+    const courseMaxStudent = document.querySelector(
+      ".form__course-max-students-input"
+    );
 
     this.courseForm.addEventListener("submit", (e) => {
       e.preventDefault();
 
       // Validate inputs
+      if (!CourseValidation.validateCourse()) {
+        return;
+      }
 
-      const courseInstance = new Course(courseName.value, courseMaxStudent.value);
+      const courseInstance = new Course(
+        courseName.value,
+        courseMaxStudent.value
+      );
       CourseManagement.addCourse(courseInstance);
     });
   }
