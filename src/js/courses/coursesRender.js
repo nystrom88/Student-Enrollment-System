@@ -90,7 +90,6 @@ class UICourses {
     this.courseForm.addEventListener("submit", (e) => {
       e.preventDefault();
 
-      // Validate inputs
       if (!CourseValidation.validateCourse()) {
         return;
       }

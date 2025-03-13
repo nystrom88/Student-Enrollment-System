@@ -11,10 +11,7 @@ class MainValidation {
         `#${field.name}, [name='${field.name}']`
       );
 
-      console.log(validationMessage);
-
       validationMessage.style.display = "none";
-      // validationMessage.classList.remove("form__validation-message");
       validationMessage.textContent = "";
 
       inputFields.addEventListener("input", () => {
@@ -25,7 +22,6 @@ class MainValidation {
       if (!inputFields.value.trim()) {
         inputFields.classList.add("form__invalid-input");
         validationMessage.style.display = "block";
-        // validationMessage.classList.add("form__validation-message");
         validationMessage.textContent = field.message;
         isValid = false;
       }
