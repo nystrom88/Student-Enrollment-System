@@ -61,10 +61,29 @@ class UICourses {
 
       // Event listeners
       deleteButton.addEventListener("click", () => {
-        //
-        CourseManagement.removeCourse();
+        this.showDeleteModal(course.title);
+        // CourseManagement.removeCourse(course.courseId);
+      });
+
+      editButton.addEventListener("click", () => {
+        console.log("Button pressed");
       });
     });
+  }
+
+  static initDeleteModal() {
+    const deleteModal = document.querySelector(".delete-modal");
+    const deleteModalCancelButton = document.querySelector(".delete-modal__cancel-button");
+    deleteModalCancelButton.addEventListener("click", () => {
+      deleteModal.classList.remove("delete-modal--show");
+    });
+  }
+
+  static showDeleteModal(courseTitle) {
+    const deleteModal = document.querySelector(".delete-modal");
+    const modalMessage = document.querySelector(".delete-modal__message");
+    deleteModal.classList.add("delete-modal--show");
+    modalMessage.textContent = `Are you sure you want to delete the following course: ${courseTitle}`;
   }
 
   static initAddEditCourseForm() {
@@ -105,6 +124,7 @@ class UICourses {
   static init() {
     this.renderCourses(CourseManagement.getCourses());
     this.initAddEditCourseForm();
+    this.initDeleteModal();
     this.addCourse();
   }
 }
