@@ -56,7 +56,7 @@ class CourseManagement {
 
     this.coursesList = filteredCourses;
     localStorage.setItem("coursesList", JSON.stringify(this.coursesList));
-    // Re-render interface
+    UICourses.renderCourses(this.coursesList);
   }
 }
 
