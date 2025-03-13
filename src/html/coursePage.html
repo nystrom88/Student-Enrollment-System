@@ -61,9 +61,10 @@
             maxlength="50"
             class="form__course-name-input"
           />
+          <p class="form__validation-message form__course-name-message"></p>
         </div>
         <div class="form-group">
-          <label for="course-max-students">Max students: *</label>
+          <label for="course-max-students">Max students*</label>
           <input
             type="number"
             name="course-max-students"
@@ -73,9 +74,14 @@
             max="30"
             class="form__course-max-students-input"
           />
+          <p
+            class="form__validation-message form__course-max-students-message"
+          ></p>
         </div>
         <div class="form-group form-group__buttons">
-          <button type="submit" class="form__add-course-button">Add course</button>
+          <button type="submit" class="form__add-course-button">
+            Add course
+          </button>
           <button type="button" class="form__cancel-button">Cancel</button>
         </div>
       </div>
