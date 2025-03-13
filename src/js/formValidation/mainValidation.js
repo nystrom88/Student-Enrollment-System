@@ -1,6 +1,6 @@
 class MainValidation {
-  static validateForm(fieldsToValidate, event) {
-    let isvalid = true;
+  static validateForm(fieldsToValidate) {
+    let isValid = true;
 
     for (let field of fieldsToValidate) {
       const validationMessage = document.querySelector(
@@ -10,14 +10,6 @@ class MainValidation {
       const inputFields = document.querySelector(
         `#${field.name}, [name='${field.name}']`
       );
-
-      console.log(field.name);
-
-      if (inputFields) {
-        console.log(`Found input:`, inputFields);
-      } else {
-        console.log(`Input not found for field:`, field.name);
-      }
 
       validationMessage.style.display = "none";
       validationMessage.textContent = "";
@@ -31,13 +23,10 @@ class MainValidation {
         inputFields.classList.add("form__invalid-input");
         validationMessage.style.display = "block";
         validationMessage.textContent = field.message;
-        isvalid = false;
+        isValid = false;
       }
     }
-    if (!isvalid && event) {
-      event.preventDefault();
-    }
-    return isvalid;
+    return isValid;
   }
 }
 

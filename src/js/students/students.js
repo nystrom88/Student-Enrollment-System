@@ -16,7 +16,10 @@ const coursesInput = document.querySelectorAll(".form__student-courses-select");
 // Form
 formModal.addEventListener("submit", (e) => {
   e.preventDefault();
-  StudentValidation.validateStudent(e);
+
+  if (!StudentValidation.validateStudent()) {
+    return;
+  }
 
   const studentName = document.querySelector(".form__student-name-input");
   const studentAge = document.querySelector(".form__student-age-input");

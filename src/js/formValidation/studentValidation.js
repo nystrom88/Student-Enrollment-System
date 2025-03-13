@@ -7,16 +7,13 @@ class StudentValidation extends MainValidation {
     { name: "course1", message: "Please Choose a Course" },
     {
       name: "student-enrollment-year",
-      message: "Please add your enrollment year",
+      message: "Please Add Your Enrollment Year",
     },
     { name: "student-email", message: "Please Enter Your Email" },
   ];
-  static logMe() {
-    console.log("heyo");
-  }
 
-  static validateStudent(event) {
-    StudentValidation.validateForm(this.fieldsToValidate, event);
+  static validateStudent() {
+    return StudentValidation.validateForm(this.fieldsToValidate);
     // this.validateForm(fieldsToValidate);
   }
 }
