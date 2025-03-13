@@ -1,6 +1,7 @@
 import CourseValidation from "../formValidation/courseValidation";
 import Course from "./courseClass";
 import CourseManagement from "./coursesManagement";
+import appState from "../core/appState";
 
 class UICourses {
   static courseForm = document.querySelector(".form__add-edit-course");
@@ -65,26 +66,78 @@ class UICourses {
         const confirmButton = document.querySelector(".delete-modal__confirm-button");
         this.showDeleteModal(course.courseName);
 
-        if (this.prevousConfirmDeleteEvent) {
-          confirmButton.removeEventListener("click", this.prevousConfirmDeleteEvent);
+        if (this.previousConfirmDeleteEvent) {
+          confirmButton.removeEventListener("click", this.previousConfirmDeleteEvent);
         }
 
-        this.prevousConfirmDeleteEvent = (e) => {
+        this.previousConfirmDeleteEvent = (e) => {
           CourseManagement.removeCourse(course.courseId);
           this.hideDeleteModal();
         };
 
-        confirmButton.addEventListener("click", this.prevousConfirmDeleteEvent);
+        confirmButton.addEventListener("click", this.previousConfirmDeleteEvent);
       });
 
       // Edit course
       editButton.addEventListener("click", () => {
-        console.log("Button pressed");
+        this.renderEditForm(course.courseId);
+
+        // Remove any existing submit event listener
+        this.courseForm.removeEventListener("submit", this.handleFormSubmit);
+
+        // Define new edit mode event listener
+        this.handleFormSubmit = (e) => {
+          e.preventDefault();
+
+          const courseNameElement = document.querySelector(".form__course-name-input");
+          const courseMaxStudentElement = document.querySelector(
+            ".form__course-max-students-input"
+          );
+
+          const courseArray = CourseManagement.getCourses();
+          const foundCourse = courseArray.find((c) => c.courseId === course.courseId);
+
+          if (foundCourse) {
+            foundCourse.courseName = courseNameElement.value.trim();
+            foundCourse.maxStudents = courseMaxStudentElement.value.trim();
+
+            CourseManagement.coursesList = courseArray;
+            localStorage.setItem("coursesList", JSON.stringify(CourseManagement.coursesList));
+            UICourses.renderCourses(CourseManagement.coursesList);
+          }
+
+          // Reset form after editing
+          this.courseForm.reset();
+          this.courseForm.classList.remove("form__add-edit-course--show");
+
+          // Remove event listener to avoid duplication
+          this.courseForm.removeEventListener("submit", this.handleFormSubmit);
+
+          // Reset edit state
+          appState.editState = false;
+        };
+
+        // Attach the new event listener for editing
+        this.courseForm.addEventListener("submit", this.handleFormSubmit);
+        appState.editState = true;
       });
     });
   }
 
-  static confirmDelete() {}
+  static renderEditForm(courseId) {
+    const courseName = document.querySelector(".form__course-name-input");
+    const courseMaxStudent = document.querySelector(".form__course-max-students-input");
+
+    const submitButton = document.querySelector(".form__submit-button");
+    this.courseForm.classList.add("form__add-edit-course--show");
+    submitButton.textContent = "Confirm edit";
+
+    const courseArray = CourseManagement.getCourses();
+    const course = courseArray.find((course) => course.courseId === courseId);
+
+    courseName.value = course.courseName;
+    courseMaxStudent.value = course.maxStudents;
+  }
 
   static initDeleteModal() {
     const deleteModal = document.querySelector(".delete-modal");
@@ -122,19 +175,31 @@ class UICourses {
   }
 
   static addCourse() {
-    const courseName = document.querySelector(".form__course-name-input");
-    const courseMaxStudent = document.querySelector(".form__course-max-students-input");
+    if (appState.editState) {
+      this.courseForm.removeEventListener("submit", this.handleFormSubmit);
+    }
 
-    this.courseForm.addEventListener("submit", (e) => {
+    this.handleFormSubmit = (e) => {
       e.preventDefault();
 
       if (!CourseValidation.validateCourse()) {
         return;
       }
 
-      const courseInstance = new Course(courseName.value, courseMaxStudent.value);
+      const courseName = document.querySelector(".form__course-name-input");
+      const courseMaxStudent = document.querySelector(".form__course-max-students-input");
+
+      const courseInstance = new Course(courseName.value.trim(), courseMaxStudent.value.trim());
       CourseManagement.addCourse(courseInstance);
-    });
+
+      // Reset form and update UI
+      this.courseForm.reset();
+      UICourses.renderCourses(CourseManagement.getCourses());
+      this.courseForm.classList.remove("form__add-edit-course--show");
+    };
+
+    this.courseForm.addEventListener("submit", this.handleFormSubmit);
+    appState.editState = false; // Ensure it's in "add mode"
   }
 
   static init() {
