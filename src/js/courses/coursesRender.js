@@ -4,6 +4,7 @@ import CourseManagement from "./coursesManagement";
 
 class UICourses {
   static courseForm = document.querySelector(".form__add-edit-course");
+  static prevousConfirmDeleteEvent = null;
 
   static renderCourses(coursesList) {
     const coursesListElement = document.querySelector(".course-list");
@@ -59,12 +60,51 @@ class UICourses {
       studentsDetails.append(studentNames, maxStudentsInfo);
       buttonsContainer.append(editButton, deleteButton);
 
-      // Event listeners
+      // Delete course
       deleteButton.addEventListener("click", () => {
-        //
-        CourseManagement.removeCourse();
+        const confirmButton = document.querySelector(".delete-modal__confirm-button");
+        this.showDeleteModal(course.courseName);
+
+        if (this.prevousConfirmDeleteEvent) {
+          confirmButton.removeEventListener("click", this.prevousConfirmDeleteEvent);
+        }
+
+        this.prevousConfirmDeleteEvent = (e) => {
+          CourseManagement.removeCourse(course.courseId);
+          this.hideDeleteModal();
+        };
+
+        confirmButton.addEventListener("click", this.prevousConfirmDeleteEvent);
+      });
+
+      // Edit course
+      editButton.addEventListener("click", () => {
+        console.log("Button pressed");
       });
     });
+  }
+
+  static confirmDelete() {}
+
+  static initDeleteModal() {
+    const deleteModal = document.querySelector(".delete-modal");
+    const deleteModalCancelButton = document.querySelector(".delete-modal__cancel-button");
+
+    deleteModalCancelButton.addEventListener("click", () => {
+      deleteModal.classList.remove("delete-modal--show");
+    });
+  }
+
+  static showDeleteModal(courseName) {
+    const deleteModal = document.querySelector(".delete-modal");
+    const modalMessage = document.querySelector(".delete-modal__message");
+    deleteModal.classList.add("delete-modal--show");
+    modalMessage.textContent = `Are you sure you want to delete the following course: ${courseName}`;
+  }
+
+  static hideDeleteModal() {
+    const deleteModal = document.querySelector(".delete-modal");
+    deleteModal.classList.remove("delete-modal--show");
   }
 
   static initAddEditCourseForm() {
@@ -83,9 +123,7 @@ class UICourses {
 
   static addCourse() {
     const courseName = document.querySelector(".form__course-name-input");
-    const courseMaxStudent = document.querySelector(
-      ".form__course-max-students-input"
-    );
+    const courseMaxStudent = document.querySelector(".form__course-max-students-input");
 
     this.courseForm.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -94,10 +132,7 @@ class UICourses {
         return;
       }
 
-      const courseInstance = new Course(
-        courseName.value,
-        courseMaxStudent.value
-      );
+      const courseInstance = new Course(courseName.value, courseMaxStudent.value);
       CourseManagement.addCourse(courseInstance);
     });
   }
@@ -105,6 +140,7 @@ class UICourses {
   static init() {
     this.renderCourses(CourseManagement.getCourses());
     this.initAddEditCourseForm();
+    this.initDeleteModal();
     this.addCourse();
   }
 }
