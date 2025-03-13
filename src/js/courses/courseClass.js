@@ -1,10 +1,10 @@
 import { v4 as uuidv4 } from "uuid";
 
 class Course {
-  constructor(courseName, students = [], instructor = "", maxStudents = 30) {
+  constructor(courseName, maxStudents) {
     this.courseName = courseName;
-    this.students = students;
-    this.instructor = instructor;
+    this.students = [];
+    this.instructor = "";
     this.maxStudents = maxStudents;
     this.courseId = uuidv4();
   }
