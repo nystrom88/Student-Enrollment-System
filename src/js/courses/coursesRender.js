@@ -92,7 +92,7 @@ class UICourses {
       // Edit course
       editButton.addEventListener("click", () => {
         this.openFormModal();
-        this.populateFormFields(); // TODO: Continue here with populating filds.
+        this.populateFormFields(course.courseId);
       });
     });
   }
@@ -124,7 +124,6 @@ class UICourses {
           courseNameInput,
           courseMaxStudentsInput
         );
-
         appState.editState = null;
         this.closeFormModal();
       }
@@ -139,6 +138,22 @@ class UICourses {
 
   static closeFormModal = () =>
     this.courseForm.classList.remove("form__add-edit-course--show");
+
+  static populateFormFields(id) {
+    const courseNameInput = document.querySelector(".form__course-name-input");
+    const courseMaxStudentsInput = document.querySelector(
+      ".form__course-max-students-input"
+    );
+
+    const courses = CourseManagement.getCourses();
+    const course = courses.find((course) => course.courseId === id);
+
+    courseNameInput.value = course.courseName;
+    courseMaxStudentsInput.value = course.maxStudents;
+
+    document.querySelector(".form__submit-button").textContent = "Confirm Edit";
+    appState.editState = id;
+  }
 
   static initDeleteModal = () => {
     const deleteModalCancelButton = document.querySelector(

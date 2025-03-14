@@ -17,7 +17,7 @@
       <h1>Student List:</h1>
       <nav class="navbar">
         <a href="./coursePage.html">Course list</a>
-        <a href="./studentPage.html">Student list</a>
+        <a href="./studentPage.html" class="link--active">Student list</a>
         <a href="./instructorPage.html">Instructor list</a>
       </nav>
     </header>
@@ -64,17 +64,31 @@
 
         <div class="form-group">
           <label for="courses">Select up to 3 courses: *</label>
-          <select name="courses" id="course1" class="form__student-courses-select">
+          <select
+            name="courses"
+            id="course1"
+            class="form__student-courses-select"
+          >
             <option value="">Unselected</option>
           </select>
           <p class="form__validation-message form__student-course-message"></p>
 
-          <select name="courses" id="course2" class="form__student-courses-select" disabled>
+          <select
+            name="courses"
+            id="course2"
+            class="form__student-courses-select"
+            disabled
+          >
             <option value="">Unselected</option>
           </select>
           <p class="form__validation-message form__student-course-message"></p>
 
-          <select name="courses" id="course3" class="form__student-courses-select" disabled>
+          <select
+            name="courses"
+            id="course3"
+            class="form__student-courses-select"
+            disabled
+          >
             <option value="">Unselected</option>
           </select>
           <p class="form__validation-message form__course1-message"></p>
@@ -92,7 +106,9 @@
             <option value="2026" name="student-enrollment-year">2026</option>
             <option value="2027" name="student-enrollment-year">2027</option>
           </select>
-          <p class="form__validation-message form__student-enrollment-year-message"></p>
+          <p
+            class="form__validation-message form__student-enrollment-year-message"
+          ></p>
         </div>
 
         <div class="form-group">
@@ -109,7 +125,9 @@
 
         <div class="form-group form-group__buttons">
           <p class="validation-message"></p>
-          <button type="submit" class="form__add-student-instructor-button">Add student</button>
+          <button type="submit" class="form__add-student-instructor-button">
+            Add student
+          </button>
           <button type="button" class="form__cancel-button">Cancel</button>
         </div>
       </div>

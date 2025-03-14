@@ -1,6 +1,7 @@
 import StudentsManagement from "./studentsManagement";
 import Student from "./studentsClass";
 import StudentValidation from "../formValidation/studentValidation";
+import appState from "../core/appState";
 
 document.addEventListener("DOMContentLoaded", () => {
   StudentsManagement.viewStudentsList();
@@ -40,14 +41,24 @@ formModal.addEventListener("submit", (e) => {
     studentCourse2.value,
     studentCourse3.value,
   ];
-
-  StudentsManagement.addStudent(
-    studentName,
-    studentAge,
-    studentEmail,
-    studentEnrollmentYear,
-    studentCourses
-  );
+  if (!appState.editingStudentId) {
+    StudentsManagement.addStudent(
+      studentName,
+      studentAge,
+      studentEmail,
+      studentEnrollmentYear,
+      studentCourses
+    );
+  } else {
+    StudentsManagement.updateStudent(
+      appState.editingStudentId,
+      studentName.value,
+      studentAge.value,
+      studentEmail.value,
+      studentEnrollmentYear.value,
+      studentCourses
+    );
+  }
   formModal.reset();
   formModal.style.display = "none";
 });
