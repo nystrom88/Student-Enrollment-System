@@ -34,7 +34,7 @@
 
 .course-list__item {
   display: flex;
-  background-color: rgb(201, 201, 201);
+  background-color: var(--background-color);
   border-radius: 5px;
   padding: var(--spacing-small);
 }
@@ -60,6 +60,7 @@
   display: flex;
   justify-content: end;
   align-items: start;
+  gap: 0.5rem;
 }
 
 .edit-add-course__button {
@@ -74,9 +75,10 @@
 
 button {
   border: none;
-  background-color: rgb(201, 201, 201);
-  font-size: large;
+  background-color: transparent;
+  font-size: var(--font-size-large);
 }
+
 .add-course__button {
   position: fixed;
   bottom: 20px;
