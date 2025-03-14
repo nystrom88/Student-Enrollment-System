@@ -3,14 +3,9 @@ class MainValidation {
     let isValid = true;
 
     for (let field of fieldsToValidate) {
-      const validationMessage = document.querySelector(
-        `.form__${field.name}-message`
-      );
-      console.log(validationMessage);
+      const validationMessage = document.querySelector(`.form__${field.name}-message`);
 
-      const inputFields = document.querySelector(
-        `#${field.name}, [name='${field.name}']`
-      );
+      const inputFields = document.querySelector(`#${field.name}, [name='${field.name}']`);
 
       validationMessage.style.display = "none";
       validationMessage.textContent = "";
