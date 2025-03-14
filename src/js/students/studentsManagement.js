@@ -115,11 +115,25 @@ class StudentManagement {
       studentEnrollmentYear.value,
       studentCourses
     );
-    console.log(studentCourses.value);
 
     studentsList.push(newStudent);
     localStorage.setItem("student-list", JSON.stringify(studentsList));
     this.viewStudentsList();
+    this.AddStudentToCourseList(newStudent);
+  }
+
+  // Push student into CourseList
+  static AddStudentToCourseList(student) {
+    const coursesList = JSON.parse(localStorage.getItem("coursesList")) || [];
+    student.courses.forEach((courseName) => {
+      coursesList.forEach((course) => {
+        // Checks if the courses name matches and pushes student into its corresponding course
+        if (courseName === course.courseName) {
+          course.students.push(student);
+        }
+      });
+    });
+    localStorage.setItem("coursesList", JSON.stringify(coursesList));
   }
 
   static editStudent(id) {
