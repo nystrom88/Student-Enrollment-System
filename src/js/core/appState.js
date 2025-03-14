@@ -1,5 +1,5 @@
 const appState = {
-  editState: false,
+  editState: null,
 };
 
 export default appState;
