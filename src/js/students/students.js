@@ -100,17 +100,20 @@ const coursesSelects = document.querySelectorAll(
 );
 const coursesList = JSON.parse(localStorage.getItem("coursesList")) || [];
 
-coursesSelects.forEach((select) => {
-  coursesList.forEach((course, i) => {
+coursesSelects.forEach((select, i) => {
+  select.innerHTML = "";
+
+  const courseDefaultOption = document.createElement("option");
+  select.append(courseDefaultOption);
+  courseDefaultOption.textContent = "Unselected";
+  courseDefaultOption.value = "";
+
+  coursesList.forEach((course, j) => {
     const courseOption = document.createElement("option");
     select.append(courseOption);
     courseOption.textContent = course.courseName;
     courseOption.value = course.courseName;
-
-    console.log(coursesList[i].maxStudents);
-    console.log(coursesList[i].students.length);
-
-    if (Number(coursesList[i].maxStudents) === coursesList[i].students.length) {
+    if (Number(coursesList[j].maxStudents) === coursesList[j].students.length) {
       courseOption.disabled = true;
       courseOption.title = "This course has been maxed out";
     } else {
@@ -119,6 +122,7 @@ coursesSelects.forEach((select) => {
     }
   });
 });
+
 addStudentInstructor.addEventListener("click", () => {
   formModal.style.display = "flex";
   confirmButton.textContent = "Add Student";

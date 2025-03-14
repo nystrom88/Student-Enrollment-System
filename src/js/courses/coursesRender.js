@@ -1,10 +1,9 @@
-import CourseValidation from "../formValidation/courseValidation";
-import Course from "./courseClass";
 import CourseManagement from "./coursesManagement";
 import appState from "../core/appState";
 
 class UICourses {
   static courseForm = document.querySelector(".form__add-edit-course");
+  static deleteModal = document.querySelector(".delete-modal");
   static prevousConfirmDeleteEvent = null;
 
   static renderCourses(coursesList) {
@@ -63,10 +62,14 @@ class UICourses {
 
       // Delete course
       deleteButton.addEventListener("click", () => {
+        this.openDeleteModal(course.courseName); // Open modal.
+
+        deleteCourse(); // Where to add delete course???
+
         const confirmButton = document.querySelector(
           ".delete-modal__confirm-button"
         );
-        this.showDeleteModal(course.courseName);
+        this.openDeleteModal(course.courseName);
 
         if (this.prevousConfirmDeleteEvent) {
           confirmButton.removeEventListener(
@@ -88,160 +91,77 @@ class UICourses {
 
       // Edit course
       editButton.addEventListener("click", () => {
-        this.renderEditForm(course.courseId);
-
-        // Remove any existing submit event listener
-        this.courseForm.removeEventListener("submit", this.handleFormSubmit);
-
-        // Define new edit mode event listener
-        this.handleFormSubmit = (e) => {
-          e.preventDefault();
-
-          const courseNameElement = document.querySelector(
-            ".form__course-name-input"
-          );
-          const courseMaxStudentElement = document.querySelector(
-            ".form__course-max-students-input"
-          );
-
-          const courseArray = CourseManagement.getCourses();
-          const foundCourse = courseArray.find(
-            (c) => c.courseId === course.courseId
-          );
-
-          if (foundCourse) {
-            foundCourse.courseName = courseNameElement.value.trim();
-            foundCourse.maxStudents = courseMaxStudentElement.value.trim();
-
-            CourseManagement.coursesList = courseArray;
-            localStorage.setItem(
-              "coursesList",
-              JSON.stringify(CourseManagement.coursesList)
-            );
-            UICourses.renderCourses(CourseManagement.coursesList);
-          }
-
-          // Reset form after editing
-          this.courseForm.reset();
-          this.courseForm.classList.remove("form__add-edit-course--show");
-
-          // Remove event listener to avoid duplication
-          this.courseForm.removeEventListener("submit", this.handleFormSubmit);
-
-          // Reset edit state
-          appState.editState = false;
-        };
-
-        // Attach the new event listener for editing
-        this.courseForm.addEventListener("submit", this.handleFormSubmit);
-        appState.editState = true;
+        this.openFormModal();
+        this.populateFormFields(); // TODO: Continue here with populating filds.
       });
     });
   }
 
-  static renderEditForm(courseId) {
-    const courseName = document.querySelector(".form__course-name-input");
-    const courseMaxStudent = document.querySelector(
-      ".form__course-max-students-input"
-    );
+  static initFormModal = () => {
+    const addCourseButton = document.querySelector(".add-course__button");
+    addCourseButton.addEventListener("click", () => {
+      this.openFormModal();
+    });
 
-    const submitButton = document.querySelector(".form__submit-button");
+    const formCancelButton = document.querySelector(".form__cancel-button");
+    formCancelButton.addEventListener("click", () => {
+      this.closeFormModal();
+    });
+
+    this.courseForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const courseNameInput = document.querySelector(
+        ".form__course-name-input"
+      );
+      const courseMaxStudentsInput = document.querySelector(
+        ".form__course-max-students-input"
+      );
+      if (!appState.editState) {
+        CourseManagement.addCourse(courseNameInput, courseMaxStudentsInput);
+      } else {
+        CourseManagement.editCourse(
+          appState.editState,
+          courseNameInput,
+          courseMaxStudentsInput
+        );
+
+        appState.editState = null;
+        this.closeFormModal();
+      }
+
+      UICourses.renderCourses(CourseManagement.coursesList);
+      this.courseForm.reset();
+    });
+  };
+
+  static openFormModal = () =>
     this.courseForm.classList.add("form__add-edit-course--show");
-    submitButton.textContent = "Confirm edit";
 
-    const courseArray = CourseManagement.getCourses();
-    const course = courseArray.find((course) => course.courseId === courseId);
+  static closeFormModal = () =>
+    this.courseForm.classList.remove("form__add-edit-course--show");
 
-    courseName.value = course.courseName;
-    courseMaxStudent.value = course.maxStudents;
-  }
-
-  static initDeleteModal() {
-    const deleteModal = document.querySelector(".delete-modal");
+  static initDeleteModal = () => {
     const deleteModalCancelButton = document.querySelector(
       ".delete-modal__cancel-button"
     );
-
     deleteModalCancelButton.addEventListener("click", () => {
-      deleteModal.classList.remove("delete-modal--show");
+      this.closeDeleteModal();
     });
-  }
+  };
 
-  static showDeleteModal(courseName) {
-    const deleteModal = document.querySelector(".delete-modal");
+  static openDeleteModal(courseName) {
+    this.deleteModal.classList.add("delete-modal--show");
     const modalMessage = document.querySelector(".delete-modal__message");
-    deleteModal.classList.add("delete-modal--show");
     modalMessage.textContent = `Are you sure you want to delete the following course: ${courseName}`;
   }
 
-  static hideDeleteModal() {
-    const deleteModal = document.querySelector(".delete-modal");
-    deleteModal.classList.remove("delete-modal--show");
-  }
-
-  static initAddEditCourseForm() {
-    const addCourseButton = document.querySelector(".add-course__button");
-    const formCancelButton = document.querySelector(".form__cancel-button");
-
-    addCourseButton.addEventListener("click", () => {
-      this.courseForm.classList.add("form__add-edit-course--show");
-    });
-
-    formCancelButton.addEventListener("click", () => {
-      this.courseForm.classList.remove("form__add-edit-course--show");
-      this.courseForm.reset();
-    });
-  }
-
-  static addCourse() {
-    const courseName = document.querySelector(".form__course-name-input");
-    const courseMaxStudent = document.querySelector(
-      ".form__course-max-students-input"
-    );
-
-    if (appState.editState) {
-      this.courseForm.removeEventListener("submit", this.handleFormSubmit);
-    }
-
-    this.handleFormSubmit = (e) => {
-      e.preventDefault();
-
-      if (!CourseValidation.validateCourse()) {
-        return;
-      }
-
-      const courseInstance = new Course(
-        courseName.value,
-        courseMaxStudent.value
-      );
-
-      const courseName = document.querySelector(".form__course-name-input");
-      const courseMaxStudent = document.querySelector(
-        ".form__course-max-students-input"
-      );
-
-      const courseInstance = new Course(
-        courseName.value.trim(),
-        courseMaxStudent.value.trim()
-      );
-
-      CourseManagement.addCourse(courseInstance);
-
-      // Reset form and update UI
-      this.courseForm.reset();
-      UICourses.renderCourses(CourseManagement.getCourses());
-      this.courseForm.classList.remove("form__add-edit-course--show");
-    };
-
-    this.courseForm.addEventListener("submit", this.handleFormSubmit);
-    appState.editState = false; // Ensure it's in "add mode"
-  }
+  static closeDeleteModal = () =>
+    this.deleteModal.classList.remove("delete-modal--show");
 
   static init() {
     this.renderCourses(CourseManagement.getCourses());
-    this.initAddEditCourseForm();
+    this.initFormModal();
     this.initDeleteModal();
-    this.addCourse();
   }
 }
 

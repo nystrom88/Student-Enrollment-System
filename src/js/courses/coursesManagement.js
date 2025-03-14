@@ -1,3 +1,5 @@
+import CourseValidation from "../formValidation/courseValidation";
+import Course from "./courseClass";
 import UICourses from "./coursesRender";
 
 class CourseManagement {
@@ -7,56 +9,43 @@ class CourseManagement {
     return JSON.parse(localStorage.getItem("coursesList")) || [];
   }
 
-  static addCourse(courseInstance) {
-    this.coursesList = JSON.parse(localStorage.getItem("coursesList")) || [];
+  static addCourse(courseNameInput, courseMaxStudentsInput) {
+    const courseNameInputValue = courseNameInput.value.trim();
+    const courseMaxStudentsInputValue = courseMaxStudentsInput.value.trim();
+
+    if (!CourseValidation.validateCourse()) {
+      return;
+    }
+
+    const courseInstance = new Course(courseNameInputValue, courseMaxStudentsInputValue);
+    this.coursesList = this.getCourses();
     this.coursesList.push(courseInstance);
     localStorage.setItem("coursesList", JSON.stringify(this.coursesList));
-    UICourses.renderCourses(this.coursesList);
   }
 
-  static editCourse(courseId) {
-    const courseArray = JSON.parse(localStorage.getItem("coursesList")) || [];
-    const course = courseArray.find((course) => course.courseId === courseId);
-    // form = document.querySelctor(".form");
-    // submitButton = document.querySelctor("");
-    // submitButton.textContent = "Confirm Edit";
+  static editCourse(id, courseNameInput, courseMaxStudentsInput) {
+    const courseNameInputValue = courseNameInput.value.trim();
+    const courseMaxStudentsInputValue = courseMaxStudentsInput.value.trim();
 
-    // POPULATE FORM
-    // Select Inputs
-    // courseName = document.querySelector("...");
-    // students = document.querySelector("...");
-    // instructor = document.querySelector("...");
-    // maxStudents = document.querySelector("...");
+    if (!CourseValidation.validateCourse()) {
+      return;
+    }
 
-    // Fill input with current details
-    // courseName.textContent = course.name;
-    // students = document.querySelector("...");
-    // instructor = document.querySelector("...");
-    // maxStudents = document.querySelector("...");
+    const courseUpdatedArray = this.getCourses();
+    const course = courseUpdatedArray.find((course) => course.courseId === id);
+    course.courseName = courseNameInputValue;
+    course.maxStudents = courseMaxStudentsInputValue;
 
-    // On submit
-    // course = {
-    //   this.courseName = courseName;
-    //   this.students = students;
-    //   this.instructor = instructor;
-    //   this.maxStudents = maxStudents;
-    // }
-
-    // this.coursesList = courseArray;
-    // localStorage.setItem("coursesList", JSON.stringify(this.coursesList));
-
-    // Revert form
-    // form.reset();
-    // submitButton.textContent = "Add course";
+    this.coursesList = courseUpdatedArray;
+    localStorage.setItem("coursesList", JSON.stringify(this.coursesList));
   }
 
   static removeCourse(courseId) {
-    const courseArray = JSON.parse(localStorage.getItem("coursesList")) || [];
-    const filteredCourses = courseArray.filter((course) => course.courseId !== courseId);
-
-    this.coursesList = filteredCourses;
-    localStorage.setItem("coursesList", JSON.stringify(this.coursesList));
-    UICourses.renderCourses(this.coursesList);
+    // const courseArray = this.getCourses();
+    // const filteredCourses = courseArray.filter((course) => course.courseId !== courseId);
+    // this.coursesList = filteredCourses;
+    // localStorage.setItem("coursesList", JSON.stringify(this.coursesList));
+    // UICourses.renderCourses(this.coursesList); // Re-render should appen in coursesRender
   }
 }
 
