@@ -9,6 +9,9 @@ class StudentManagement {
     const listContainer = document.querySelector(".student-list__list");
     listContainer.innerHTML = "";
 
+    const formModal = document.querySelector(
+      ".form__add-edit-student-instructor"
+    );
     const studentsList = JSON.parse(localStorage.getItem("student-list")) || [];
     console.log(studentsList);
 
@@ -25,6 +28,9 @@ class StudentManagement {
       const toolsContainer = document.createElement("div");
       const editButton = document.createElement("button");
       const deleteButton = document.createElement("button");
+      const confirmButton = document.querySelector(
+        ".form__add-student-instructor-button"
+      );
 
       // Appending
       listContainer.append(listElement);
@@ -61,15 +67,34 @@ class StudentManagement {
       listElementCourse2.textContent = studentsList[i].courses[1];
       listElementCourse3.textContent = studentsList[i].courses[2];
       listElementEmail.textContent = studentsList[i].email;
-      editButton.textContent = "Edit";
-      deleteButton.textContent = "Delete";
+      editButton.innerHTML = '<i class="fa-solid fa-user-pen"></i>';
+      deleteButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
 
       editButton.addEventListener("click", () => {
-        // Populate and open form ^
+        this.editStudent(student.id);
+        formModal.style.display = "flex";
+        confirmButton.textContent = "Confirm Edit";
       });
 
       deleteButton.addEventListener("click", () => {
-        this.removeStudent();
+        const deleteModal = document.querySelector(".delete-modal");
+        const confirmDeleteButton = document.querySelector(
+          ".delete-modal__confirm-button"
+        );
+        const declineDeleteButton = document.querySelector(
+          ".delete-modal__cancel-button"
+        );
+        deleteModal.classList.add("delete-modal--show");
+
+        confirmDeleteButton.addEventListener("click", () => {
+          this.removeStudent(student.id);
+          student.id = "";
+          deleteModal.classList.remove("delete-modal--show");
+        });
+
+        declineDeleteButton.addEventListener("click", () => {
+          deleteModal.classList.remove("delete-modal--show");
+        });
       });
     });
   }
@@ -97,11 +122,40 @@ class StudentManagement {
     this.viewStudentsList();
   }
 
-  static editStudent() {}
+  static editStudent(id) {
+    console.log("editing student");
+
+    const studentsList = JSON.parse(localStorage.getItem("student-list")) || [];
+    const studentNameInput = document.querySelector(
+      ".form__student-name-input"
+    );
+    const studentAgeInput = document.querySelector(".form__student-age-input");
+    const studentCourse1Select = document.querySelector("#course1");
+    const studentCourse2Select = document.querySelector("#course2");
+    const studentCourse3Select = document.querySelector("#course3");
+    const studentEnrollmentYearInput = document.querySelector(
+      ".form__student-enrollment-year-select"
+    );
+    const studentEmailInput = document.querySelector(
+      ".form__student-email-input"
+    );
+
+    const studentToEdit = studentsList.find((student) => student.id === id);
+    console.log(studentToEdit);
+
+    studentNameInput.value = studentToEdit.name;
+    studentAgeInput.value = studentToEdit.age;
+    studentCourse1Select.value = studentToEdit.courses[0];
+    studentCourse2Select.value = studentToEdit.courses[1];
+    studentCourse3Select.value = studentToEdit.courses[2];
+    studentEnrollmentYearInput.value = studentToEdit.enrollmentYear;
+    studentEmailInput.value = studentToEdit.email;
+  }
+
   static removeStudent(studentId) {
     const studentsList = JSON.parse(localStorage.getItem("student-list")) || [];
     const filteredStudents = studentsList.filter(
-      (student) => student.studentId !== studentId
+      (student) => student.id !== studentId
     );
     localStorage.setItem("student-list", JSON.stringify(filteredStudents));
     this.viewStudentsList();
