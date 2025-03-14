@@ -107,5 +107,16 @@ coursesSelects.forEach((select) => {
     select.append(courseOption);
     courseOption.textContent = course.courseName;
     courseOption.value = course.courseName;
+
+    console.log(coursesList[i].maxStudents);
+    console.log(coursesList[i].students.length);
+
+    if (Number(coursesList[i].maxStudents) === coursesList[i].students.length) {
+      courseOption.disabled = true;
+      courseOption.title = "This course has been maxed out";
+    } else {
+      courseOption.disabled = false;
+      courseOption.title = "";
+    }
   });
 });
