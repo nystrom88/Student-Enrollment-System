@@ -1,4 +1,5 @@
 import appState from "../core/appState";
+import CourseManagement from "../courses/coursesManagement";
 import enableDisableCourseOptions from "./students";
 import Student from "./studentsClass";
 
@@ -168,9 +169,23 @@ class StudentManagement {
   }
 
   static removeStudent(studentId) {
+    // Get all students
     const studentsList = JSON.parse(localStorage.getItem("student-list")) || [];
     const filteredStudents = studentsList.filter((student) => student.id !== studentId);
     localStorage.setItem("student-list", JSON.stringify(filteredStudents));
+
+    // Get all courses and remove student from their students list
+    const courseList = CourseManagement.getCourses();
+    const updatedCourses = courseList.map((course) => {
+      return {
+        ...course,
+        students: course.students.filter((student) => student.id !== studentId), // Remove student
+      };
+    });
+
+    CourseManagement.coursesList = updatedCourses;
+    localStorage.setItem("coursesList", JSON.stringify(CourseManagement.coursesList));
+
     this.viewStudentsList();
   }
 }

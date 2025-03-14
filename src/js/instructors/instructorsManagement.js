@@ -160,8 +160,22 @@ class InstructorManagement {
 
   static removeInstructor(id) {
     const instructorsList = this.getInstructors();
-    const filteredInstructor = instructorsList.filter((instructor) => instructor.id !== id);
-    localStorage.setItem("instructors-list", JSON.stringify(filteredInstructor));
+
+    // Remove instructor name from courses
+    const courseList = CourseManagement.getCourses();
+    const updatedCourses = courseList.map((course) => {
+      if (course.instructor.id === id) {
+        return { ...course, instructor: { ...course.instructor, name: undefined } };
+      }
+      return course;
+    });
+    CourseManagement.coursesList = updatedCourses;
+    localStorage.setItem("coursesList", JSON.stringify(CourseManagement.coursesList));
+
+    // Delete instructor
+    const filteredInstructors = instructorsList.filter((instructor) => instructor.id !== id);
+    localStorage.setItem("instructors-list", JSON.stringify(filteredInstructors));
+
     this.viewInstructorsList();
   }
 }
