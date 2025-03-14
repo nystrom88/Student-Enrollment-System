@@ -1,3 +1,5 @@
+import appState from "../core/appState";
+import enableDisableCourseOptions from "./instructors";
 import Instructor from "./instructorsClass";
 // import instructorsList from "./instructorsList";
 
@@ -9,8 +11,11 @@ class InstructorManagement {
     const listContainer = document.querySelector(".instructor-list__list");
     listContainer.innerHTML = "";
 
+    const formModal = document.querySelector(
+      ".form__add-edit-student-instructor"
+    );
     const instructorsList =
-      JSON.parse(localStorage.getItem("instructors-list")) || [];
+      JSON.parse(localStorage.getItem("instructor-list")) || [];
     console.log(instructorsList);
 
     instructorsList.forEach((instructor, i) => {
@@ -26,6 +31,9 @@ class InstructorManagement {
       const toolsContainer = document.createElement("div");
       const editButton = document.createElement("button");
       const deleteButton = document.createElement("button");
+      const confirmButton = document.querySelector(
+        ".form__add-student-instructor-button"
+      );
 
       // Appending
       listContainer.append(listElement);
@@ -66,11 +74,30 @@ class InstructorManagement {
       deleteButton.textContent = "🗑️";
 
       editButton.addEventListener("click", () => {
-        // Populate and open form ^
+        this.editStudent(instructor.id);
+        formModal.style.display = "flex";
+        confirmButton.textContent = "Confirm Edit";
       });
 
       deleteButton.addEventListener("click", () => {
-        this.removeInstructor();
+        const deleteModal = document.querySelector(".delete-modal");
+        const confirmDeleteButton = document.querySelector(
+          ".delete-modal__confirm-button"
+        );
+        const declineDeleteButton = document.querySelector(
+          ".delete-modal__cancel-button"
+        );
+
+        deleteModal.classList.add("delete-modal--show");
+
+        confirmDeleteButton.addEventListener("click", () => {
+          this.removeStudent(instructor.id);
+          student.id = "";
+          deleteModal.classList.remove("delete-modal--show");
+        });
+        declineDeleteButton.addEventListener("click", () => {
+          deleteModal.classList.remove("delete-modal--show");
+        });
       });
     });
   }
@@ -81,7 +108,7 @@ class InstructorManagement {
     instructorEmail,
     instructorCourses
   ) {
-    // Update studentsList and local storage with newly added Student
+    // Update InstructorsList and local storage with newly added Instructor
     const instructorsList =
       JSON.parse(localStorage.getItem("instructors-list")) || [];
     const newInstructor = new Instructor(
@@ -92,8 +119,9 @@ class InstructorManagement {
     );
 
     instructorsList.push(newInstructor);
-    localStorage.setItem("instructors-list", JSON.stringify(instructorsList));
+    localStorage.setItem("instructor-list", JSON.stringify(instructorsList));
     this.viewInstructorsList();
+    this.AddInstructorToCourseList(newInstructor);
   }
 
   // Push instructor into CourseList
@@ -103,7 +131,7 @@ class InstructorManagement {
       coursesList.forEach((course) => {
         // Checks if the courses name matches and pushes instructor into its corresponding course
         if (courseName === course.courseName) {
-          course.instructor.push(instructor);
+          course.instructors.push(instructor);
         }
       });
     });
@@ -118,6 +146,7 @@ class InstructorManagement {
     const instructorNameInput = document.querySelector(
       ".form__instructor-name-input"
     );
+
     const instructorAgeInput = document.querySelector(
       ".form__instructor-age-input"
     );
@@ -131,7 +160,6 @@ class InstructorManagement {
     const instructorToEdit = instructorsList.find(
       (instructor) => instructor.id === id
     );
-    console.log(instructorToEdit);
 
     instructorNameInput.value = instructorToEdit.name;
     instructorAgeInput.value = instructorToEdit.age;
@@ -139,18 +167,44 @@ class InstructorManagement {
     instructorCourse2Select.value = instructorToEdit.courses[1];
     instructorCourse3Select.value = instructorToEdit.courses[2];
     instructorEmailInput.value = instructorToEdit.email;
+
+    appState.editinstructorId = instructorToEdit.id;
+
+    enableDisableCourseOptions();
+  }
+  static updateInstructor(
+    id,
+    instructorName,
+    instructorAge,
+    instructorEmail,
+    instructorCourses
+  ) {
+    const instructorList =
+      JSON.parse(localStorage.getItem("instructor-list")) || [];
+
+    const instructorToUpdate = instructorList.find(
+      (instructor) => instructor.id === id
+    );
+
+    if (instructorToUpdate) {
+      instructorToUpdate.name = instructorName;
+      instructorToUpdate.age = instructorAge;
+      instructorToUpdate.email = instructorEmail;
+      instructorToUpdate.courses = instructorCourses;
+
+      localStorage.setItem("instructor-list", JSON.stringify(instructorList));
+      this.viewInstructorsList();
+      appState.editingInstructorId = null;
+    }
   }
 
   static removeInstructor(instructorId) {
     const instructorsList =
-      JSON.parse(localStorage.getItem("instructors-list")) || [];
+      JSON.parse(localStorage.getItem("instructor-list")) || [];
     const filteredInstructor = instructorsList.filter(
       (instructor) => instructor.instructorId !== instructorId
     );
-    localStorage.setItem(
-      "instructors-list",
-      JSON.stringify(filteredInstructor)
-    );
+    localStorage.setItem("instructor-list", JSON.stringify(filteredInstructor));
     this.viewInstructorsList();
   }
 }

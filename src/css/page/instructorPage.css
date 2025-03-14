@@ -37,9 +37,14 @@
   flex-basis: 10%;
 }
 
-.tools__edit-button,
-.tools__delete-button {
-  background-color: transparent;
+.add-student-instructor__button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 70px;
+  height: 70px;
+  border-radius: 0.4rem;
+  background-color: var(--background-color);
 }
 
 .add-student-instructor__button:hover {
@@ -104,16 +109,31 @@ input {
   font-family: Mulish;
 }
 
-.instructor-list__list {
+.instructor-container {
   display: flex;
-  flex-direction: column;
+  width: 100%;
+  height: 70px;
+  padding: 1rem;
 }
 
 .instructors-list-container:nth-child(even) .student-container {
   background-color: var(--secondary-color);
 }
 
-.instructor-container {
+.instructor-list__list {
   display: flex;
-  width: 100%;
+  flex-direction: column;
+  flex-direction: column;
+  align-items: center;
+}
+
+.instructor-list__tools-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.form__add-student-instructor-button,
+.form__cancel-button {
+  font-size: large;
+  font-weight: bold;
 }
