@@ -63,16 +63,11 @@ class UICourses {
 
       // Delete course
       deleteButton.addEventListener("click", () => {
-        const confirmButton = document.querySelector(
-          ".delete-modal__confirm-button"
-        );
+        const confirmButton = document.querySelector(".delete-modal__confirm-button");
         this.showDeleteModal(course.courseName);
 
         if (this.prevousConfirmDeleteEvent) {
-          confirmButton.removeEventListener(
-            "click",
-            this.prevousConfirmDeleteEvent
-          );
+          confirmButton.removeEventListener("click", this.prevousConfirmDeleteEvent);
         }
 
         this.previousConfirmDeleteEvent = (e) => {
@@ -146,9 +141,7 @@ class UICourses {
 
   static initDeleteModal() {
     const deleteModal = document.querySelector(".delete-modal");
-    const deleteModalCancelButton = document.querySelector(
-      ".delete-modal__cancel-button"
-    );
+    const deleteModalCancelButton = document.querySelector(".delete-modal__cancel-button");
 
     deleteModalCancelButton.addEventListener("click", () => {
       deleteModal.classList.remove("delete-modal--show");
@@ -183,9 +176,7 @@ class UICourses {
 
   static addCourse() {
     const courseName = document.querySelector(".form__course-name-input");
-    const courseMaxStudent = document.querySelector(
-      ".form__course-max-students-input"
-    );
+    const courseMaxStudent = document.querySelector(".form__course-max-students-input");
 
     if (appState.editState) {
       this.courseForm.removeEventListener("submit", this.handleFormSubmit);
@@ -197,11 +188,6 @@ class UICourses {
       if (!CourseValidation.validateCourse()) {
         return;
       }
-
-      const courseInstance = new Course(
-        courseName.value,
-        courseMaxStudent.value
-      );
 
       const courseName = document.querySelector(".form__course-name-input");
       const courseMaxStudent = document.querySelector(".form__course-max-students-input");
