@@ -80,7 +80,10 @@ class UICourses {
           this.hideDeleteModal();
         };
 
-        confirmButton.addEventListener("click", this.previousConfirmDeleteEvent);
+        confirmButton.addEventListener(
+          "click",
+          this.previousConfirmDeleteEvent
+        );
       });
 
       // Edit course
@@ -94,20 +97,27 @@ class UICourses {
         this.handleFormSubmit = (e) => {
           e.preventDefault();
 
-          const courseNameElement = document.querySelector(".form__course-name-input");
+          const courseNameElement = document.querySelector(
+            ".form__course-name-input"
+          );
           const courseMaxStudentElement = document.querySelector(
             ".form__course-max-students-input"
           );
 
           const courseArray = CourseManagement.getCourses();
-          const foundCourse = courseArray.find((c) => c.courseId === course.courseId);
+          const foundCourse = courseArray.find(
+            (c) => c.courseId === course.courseId
+          );
 
           if (foundCourse) {
             foundCourse.courseName = courseNameElement.value.trim();
             foundCourse.maxStudents = courseMaxStudentElement.value.trim();
 
             CourseManagement.coursesList = courseArray;
-            localStorage.setItem("coursesList", JSON.stringify(CourseManagement.coursesList));
+            localStorage.setItem(
+              "coursesList",
+              JSON.stringify(CourseManagement.coursesList)
+            );
             UICourses.renderCourses(CourseManagement.coursesList);
           }
 
@@ -131,7 +141,9 @@ class UICourses {
 
   static renderEditForm(courseId) {
     const courseName = document.querySelector(".form__course-name-input");
-    const courseMaxStudent = document.querySelector(".form__course-max-students-input");
+    const courseMaxStudent = document.querySelector(
+      ".form__course-max-students-input"
+    );
 
     const submitButton = document.querySelector(".form__submit-button");
     this.courseForm.classList.add("form__add-edit-course--show");
@@ -204,9 +216,14 @@ class UICourses {
       );
 
       const courseName = document.querySelector(".form__course-name-input");
-      const courseMaxStudent = document.querySelector(".form__course-max-students-input");
+      const courseMaxStudent = document.querySelector(
+        ".form__course-max-students-input"
+      );
 
-      const courseInstance = new Course(courseName.value.trim(), courseMaxStudent.value.trim());
+      const courseInstance = new Course(
+        courseName.value.trim(),
+        courseMaxStudent.value.trim()
+      );
 
       CourseManagement.addCourse(courseInstance);
 

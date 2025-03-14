@@ -1,3 +1,4 @@
+import enableDisableCourseOptions from "./students";
 import Student from "./studentsClass";
 // import studentsList from "./studentsList";
 
@@ -164,6 +165,8 @@ class StudentManagement {
     studentCourse3Select.value = studentToEdit.courses[2];
     studentEnrollmentYearInput.value = studentToEdit.enrollmentYear;
     studentEmailInput.value = studentToEdit.email;
+
+    enableDisableCourseOptions();
   }
 
   static removeStudent(studentId) {

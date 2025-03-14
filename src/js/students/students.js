@@ -52,11 +52,6 @@ formModal.addEventListener("submit", (e) => {
   formModal.style.display = "none";
 });
 
-addStudentInstructor.addEventListener("click", () => {
-  formModal.style.display = "flex";
-  confirmButton.textContent = "Add Student";
-});
-
 cancelButton.addEventListener("click", () => {
   formModal.reset();
   formModal.style.display = "none";
@@ -66,9 +61,7 @@ cancelButton.addEventListener("click", () => {
   coursesInput[2].setAttribute("disabled", "true");
 });
 
-// Disable/enable course inputs based on selected
-coursesInput[0].addEventListener("change", () => {
-  // Makes it so second and third input is enabled if they have already had something selected on it
+const enableDisableCourseOptions = () => {
   if (coursesInput[0].value != "" && coursesInput[1].value != "") {
     coursesInput[1].removeAttribute("disabled");
     coursesInput[2].removeAttribute("disabled");
@@ -82,9 +75,7 @@ coursesInput[0].addEventListener("change", () => {
     coursesInput[1].selectedIndex = 0;
     coursesInput[2].selectedIndex = 0;
   }
-});
 
-coursesInput[1].addEventListener("change", () => {
   // Enables course 3 if course 2 has been selected
   if (coursesInput[1].value != "") {
     coursesInput[2].removeAttribute("disabled");
@@ -93,6 +84,14 @@ coursesInput[1].addEventListener("change", () => {
     coursesInput[2].setAttribute("disabled", "true");
     coursesInput[2].selectedIndex = 0;
   }
+};
+
+// Disable/enable course inputs based on selected
+coursesInput[0].addEventListener("change", () => {
+  enableDisableCourseOptions();
+});
+coursesInput[1].addEventListener("change", () => {
+  enableDisableCourseOptions();
 });
 
 // Populate student form with Courses
@@ -120,3 +119,10 @@ coursesSelects.forEach((select) => {
     }
   });
 });
+addStudentInstructor.addEventListener("click", () => {
+  formModal.style.display = "flex";
+  confirmButton.textContent = "Add Student";
+  enableDisableCourseOptions();
+});
+
+export default enableDisableCourseOptions;
