@@ -90,3 +90,32 @@ coursesInput[1].addEventListener("change", () => {
     coursesInput[2].selectedIndex = 0;
   }
 });
+
+// Populate instructor form with Courses
+const coursesSelects = document.querySelectorAll(
+  ".form__instructor-courses-select"
+);
+const coursesList = JSON.parse(localStorage.getItem("coursesList")) || [];
+
+coursesSelects.forEach((select) => {
+  coursesList.forEach((course, i) => {
+    const courseOption = document.createElement("option");
+    select.append(courseOption);
+    courseOption.textContent = course.courseName;
+    courseOption.value = course.courseName;
+
+    console.log(coursesList[i].maxInstructors);
+    console.log(coursesList[i].instructors.length);
+
+    if (
+      Number(coursesList[i].maxInstructors) ===
+      coursesList[i].instructors.length
+    ) {
+      courseOption.disabled = true;
+      courseOption.title = "This course has been maxed out";
+    } else {
+      courseOption.disabled = false;
+      courseOption.title = "";
+    }
+  });
+});

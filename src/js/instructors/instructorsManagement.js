@@ -4,7 +4,7 @@ import Instructor from "./instructorsClass";
 class InstructorManagement {
   static viewInstructorsList() {
     // Fetches data from the local storage or creates an Empty array if there is nothing stored
-    // const studentList = JSON.parse(localStorage.getItem("student-list")) || [];
+    // const instructorList = JSON.parse(localStorage.getItem("instructor-list")) || [];
 
     const listContainer = document.querySelector(".instructor-list__list");
     listContainer.innerHTML = "";
@@ -70,7 +70,7 @@ class InstructorManagement {
       });
 
       deleteButton.addEventListener("click", () => {
-        this.removeInstructors();
+        this.removeInstructor();
       });
     });
   }
@@ -96,7 +96,51 @@ class InstructorManagement {
     this.viewInstructorsList();
   }
 
-  static editInstructor() {}
+  // Push instructor into CourseList
+  static AddInstructorToCourseList(instructor) {
+    const coursesList = JSON.parse(localStorage.getItem("coursesList")) || [];
+    instructor.courses.forEach((courseName) => {
+      coursesList.forEach((course) => {
+        // Checks if the courses name matches and pushes instructor into its corresponding course
+        if (courseName === course.courseName) {
+          course.instructor.push(instructor);
+        }
+      });
+    });
+    localStorage.setItem("coursesList", JSON.stringify(coursesList));
+  }
+
+  static editInstructor(id) {
+    console.log("editing instructor");
+
+    const instructorsList =
+      JSON.parse(localStorage.getItem("instructor-list")) || [];
+    const instructorNameInput = document.querySelector(
+      ".form__instructor-name-input"
+    );
+    const instructorAgeInput = document.querySelector(
+      ".form__instructor-age-input"
+    );
+    const instructorCourse1Select = document.querySelector("#course1");
+    const instructorCourse2Select = document.querySelector("#course2");
+    const instructorCourse3Select = document.querySelector("#course3");
+    const instructorEmailInput = document.querySelector(
+      ".form__instructor-email-input"
+    );
+
+    const instructorToEdit = instructorsList.find(
+      (instructor) => instructor.id === id
+    );
+    console.log(instructorToEdit);
+
+    instructorNameInput.value = instructorToEdit.name;
+    instructorAgeInput.value = instructorToEdit.age;
+    instructorCourse1Select.value = instructorToEdit.courses[0];
+    instructorCourse2Select.value = instructorToEdit.courses[1];
+    instructorCourse3Select.value = instructorToEdit.courses[2];
+    instructorEmailInput.value = instructorToEdit.email;
+  }
+
   static removeInstructor(instructorId) {
     const instructorsList =
       JSON.parse(localStorage.getItem("instructors-list")) || [];

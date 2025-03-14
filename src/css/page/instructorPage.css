@@ -30,7 +30,7 @@
 }
 
 .instructor-list__email {
-  flex-basis: 30%;
+  flex-basis: 1;
 }
 
 .instructor-list__tools {
@@ -40,6 +40,10 @@
 .tools__edit-button,
 .tools__delete-button {
   background-color: transparent;
+}
+
+.add-student-instructor__button:hover {
+  opacity: 0.8;
 }
 
 .form__add-edit-student-instructor {
@@ -103,6 +107,10 @@ input {
 .instructor-list__list {
   display: flex;
   flex-direction: column;
+}
+
+.instructors-list-container:nth-child(even) .student-container {
+  background-color: var(--secondary-color);
 }
 
 .instructor-container {
