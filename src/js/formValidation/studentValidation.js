@@ -14,7 +14,6 @@ class StudentValidation extends MainValidation {
 
   static validateStudent() {
     return StudentValidation.validateForm(this.fieldsToValidate);
-    // this.validateForm(fieldsToValidate);
   }
 }
 
