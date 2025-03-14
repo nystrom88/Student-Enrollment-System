@@ -132,6 +132,14 @@ input {
   gap: 1rem;
 }
 
+.tools__edit-button,
+.tools__delete-button {
+  width: 30px;
+  height: 30px;
+  border: none;
+  font-size: x-large;
+}
+
 .form__add-student-instructor-button,
 .form__cancel-button {
   font-size: large;

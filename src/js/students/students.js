@@ -1,6 +1,7 @@
 import StudentsManagement from "./studentsManagement";
 import Student from "./studentsClass";
 import StudentValidation from "../formValidation/studentValidation";
+import appState from "../core/appState";
 
 document.addEventListener("DOMContentLoaded", () => {
   StudentsManagement.viewStudentsList();
@@ -40,21 +41,27 @@ formModal.addEventListener("submit", (e) => {
     studentCourse2.value,
     studentCourse3.value,
   ];
-
-  StudentsManagement.addStudent(
-    studentName,
-    studentAge,
-    studentEmail,
-    studentEnrollmentYear,
-    studentCourses
-  );
+  if (!appState.editingStudentId) {
+    StudentsManagement.addStudent(
+      studentName,
+      studentAge,
+      studentEmail,
+      studentEnrollmentYear,
+      studentCourses
+    );
+  } else {
+    StudentsManagement.updateStudent(
+      appState.editingStudentId,
+      studentName.value,
+      studentAge.value,
+      studentEmail.value,
+      studentEnrollmentYear.value,
+      studentCourses
+    );
+  }
   formModal.reset();
   formModal.style.display = "none";
-});
-
-addStudentInstructor.addEventListener("click", () => {
-  formModal.style.display = "flex";
-  confirmButton.textContent = "Add Student";
+  populateCourses();
 });
 
 cancelButton.addEventListener("click", () => {
@@ -66,9 +73,7 @@ cancelButton.addEventListener("click", () => {
   coursesInput[2].setAttribute("disabled", "true");
 });
 
-// Disable/enable course inputs based on selected
-coursesInput[0].addEventListener("change", () => {
-  // Makes it so second and third input is enabled if they have already had something selected on it
+const enableDisableCourseOptions = () => {
   if (coursesInput[0].value != "" && coursesInput[1].value != "") {
     coursesInput[1].removeAttribute("disabled");
     coursesInput[2].removeAttribute("disabled");
@@ -82,9 +87,7 @@ coursesInput[0].addEventListener("change", () => {
     coursesInput[1].selectedIndex = 0;
     coursesInput[2].selectedIndex = 0;
   }
-});
 
-coursesInput[1].addEventListener("change", () => {
   // Enables course 3 if course 2 has been selected
   if (coursesInput[1].value != "") {
     coursesInput[2].removeAttribute("disabled");
@@ -93,30 +96,55 @@ coursesInput[1].addEventListener("change", () => {
     coursesInput[2].setAttribute("disabled", "true");
     coursesInput[2].selectedIndex = 0;
   }
+};
+
+// Disable/enable course inputs based on selected
+coursesInput[0].addEventListener("change", () => {
+  enableDisableCourseOptions();
+});
+coursesInput[1].addEventListener("change", () => {
+  enableDisableCourseOptions();
 });
 
-// Populate student form with Courses
-const coursesSelects = document.querySelectorAll(
-  ".form__student-courses-select"
-);
-const coursesList = JSON.parse(localStorage.getItem("coursesList")) || [];
+const populateCourses = () => {
+  // Populate student form with Courses
+  const coursesSelects = document.querySelectorAll(
+    ".form__student-courses-select"
+  );
+  const coursesList = JSON.parse(localStorage.getItem("coursesList")) || [];
 
-coursesSelects.forEach((select) => {
-  coursesList.forEach((course, i) => {
-    const courseOption = document.createElement("option");
-    select.append(courseOption);
-    courseOption.textContent = course.courseName;
-    courseOption.value = course.courseName;
+  coursesSelects.forEach((select, i) => {
+    select.innerHTML = "";
 
-    console.log(coursesList[i].maxStudents);
-    console.log(coursesList[i].students.length);
+    const courseDefaultOption = document.createElement("option");
+    select.append(courseDefaultOption);
+    courseDefaultOption.textContent = "Unselected";
+    courseDefaultOption.value = "";
 
-    if (Number(coursesList[i].maxStudents) === coursesList[i].students.length) {
-      courseOption.disabled = true;
-      courseOption.title = "This course has been maxed out";
-    } else {
-      courseOption.disabled = false;
-      courseOption.title = "";
-    }
+    coursesList.forEach((course, j) => {
+      const courseOption = document.createElement("option");
+      select.append(courseOption);
+      courseOption.textContent = course.courseName;
+      courseOption.value = course.courseName;
+      if (
+        Number(coursesList[j].maxStudents) === coursesList[j].students.length
+      ) {
+        courseOption.disabled = true;
+        courseOption.title = "This course has been maxed out";
+      } else {
+        courseOption.disabled = false;
+        courseOption.title = "";
+      }
+    });
   });
-});
+
+  addStudentInstructor.addEventListener("click", () => {
+    formModal.style.display = "flex";
+    confirmButton.textContent = "Add Student";
+    enableDisableCourseOptions();
+  });
+};
+
+populateCourses();
+
+export default enableDisableCourseOptions;
