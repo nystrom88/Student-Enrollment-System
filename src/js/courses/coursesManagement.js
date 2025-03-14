@@ -1,6 +1,5 @@
 import CourseValidation from "../formValidation/courseValidation";
 import Course from "./courseClass";
-import UICourses from "./coursesRender";
 
 class CourseManagement {
   static coursesList = [];
@@ -40,12 +39,11 @@ class CourseManagement {
     localStorage.setItem("coursesList", JSON.stringify(this.coursesList));
   }
 
-  static removeCourse(courseId) {
-    // const courseArray = this.getCourses();
-    // const filteredCourses = courseArray.filter((course) => course.courseId !== courseId);
-    // this.coursesList = filteredCourses;
-    // localStorage.setItem("coursesList", JSON.stringify(this.coursesList));
-    // UICourses.renderCourses(this.coursesList); // Re-render should appen in coursesRender
+  static removeCourse(id) {
+    const courseArray = this.getCourses();
+    const filteredCourses = courseArray.filter((course) => course.courseId !== id);
+    this.coursesList = filteredCourses;
+    localStorage.setItem("coursesList", JSON.stringify(this.coursesList));
   }
 }
 
