@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.css"
+    />
     <link rel="stylesheet" href="../css/styles.css" />
     <script type="module" src="../js/students/students.js"></script>
     <title>Student List</title>
@@ -66,18 +70,6 @@
             class="form__student-courses-select"
           >
             <option value="">Unselected</option>
-            <option value="art">Art</option>
-            <option value="back-end">Back-End</option>
-            <option value="bartending">Bartending</option>
-            <option value="culinary">Culinary</option>
-            <option value="english">English</option>
-            <option value="front-end">Front-End</option>
-            <option value="full-stack">Full-stack</option>
-            <option value="geography">Geography</option>
-            <option value="law">Law</option>
-            <option value="math">Math</option>
-            <option value="science">Science</option>
-            <option value="teaching">Teaching</option>
           </select>
           <p class="form__validation-message form__student-course-message"></p>
 
@@ -88,18 +80,6 @@
             disabled
           >
             <option value="">Unselected</option>
-            <option value="art">Art</option>
-            <option value="back-end">Back-End</option>
-            <option value="bartending">Bartending</option>
-            <option value="culinary">Culinary</option>
-            <option value="english">English</option>
-            <option value="front-end">Front-End</option>
-            <option value="full-stack">Full-stack</option>
-            <option value="geography">Geography</option>
-            <option value="law">Law</option>
-            <option value="math">Math</option>
-            <option value="science">Science</option>
-            <option value="teaching">Teaching</option>
           </select>
           <p class="form__validation-message form__student-course-message"></p>
 
@@ -110,18 +90,6 @@
             disabled
           >
             <option value="">Unselected</option>
-            <option value="art">Art</option>
-            <option value="back-end">Back-End</option>
-            <option value="bartending">Bartending</option>
-            <option value="culinary">Culinary</option>
-            <option value="english">English</option>
-            <option value="front-end">Front-End</option>
-            <option value="full-stack">Full-stack</option>
-            <option value="geography">Geography</option>
-            <option value="law">Law</option>
-            <option value="math">Math</option>
-            <option value="science">Science</option>
-            <option value="teaching">Teaching</option>
           </select>
           <p class="form__validation-message form__course1-message"></p>
         </div>
@@ -167,5 +135,16 @@
 
     <!-- Add new student/instructor button -->
     <button class="add-student-instructor__button">+</button>
+
+    <!-- Delete Modal -->
+    <div class="delete-modal">
+      <div class="delete-modal__container">
+        <p class="delete-modal__message">Are you sure you want to delete...</p>
+        <div class="delete-modal__buttons">
+          <button class="delete-modal__confirm-button">Confirm</button>
+          <button class="delete-modal__cancel-button">Cancel</button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

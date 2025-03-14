@@ -10,6 +10,9 @@ const formModal = document.querySelector(".form__add-edit-student-instructor");
 const addStudentInstructor = document.querySelector(
   ".add-student-instructor__button"
 );
+const confirmButton = document.querySelector(
+  ".form__add-student-instructor-button"
+);
 const cancelButton = document.querySelector(".form__cancel-button");
 const coursesInput = document.querySelectorAll(".form__student-courses-select");
 
@@ -51,6 +54,7 @@ formModal.addEventListener("submit", (e) => {
 
 addStudentInstructor.addEventListener("click", () => {
   formModal.style.display = "flex";
+  confirmButton.textContent = "Add Student";
 });
 
 cancelButton.addEventListener("click", () => {
@@ -89,4 +93,19 @@ coursesInput[1].addEventListener("change", () => {
     coursesInput[2].setAttribute("disabled", "true");
     coursesInput[2].selectedIndex = 0;
   }
+});
+
+// Populate student form with Courses
+const coursesSelects = document.querySelectorAll(
+  ".form__student-courses-select"
+);
+const coursesList = JSON.parse(localStorage.getItem("coursesList")) || [];
+
+coursesSelects.forEach((select) => {
+  coursesList.forEach((course, i) => {
+    const courseOption = document.createElement("option");
+    select.append(courseOption);
+    courseOption.textContent = course.courseName;
+    courseOption.value = course.courseName;
+  });
 });

@@ -16,7 +16,7 @@
 
 .student-list__headings {
   font-weight: bold;
-  background-color: rgb(201, 201, 201);
+  background-color: var(--secondary-color);
   border-top-left-radius: 0.4rem;
   border-top-right-radius: 0.4rem;
 }
@@ -43,12 +43,12 @@
   right: 20px;
   width: 70px;
   height: 70px;
-  border: 1px solid black;
   border-radius: 0.4rem;
+  background-color: var(--background-color);
 }
 
 .add-student-instructor__button:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+  opacity: 0.8;
 }
 
 .form__add-edit-student-instructor {
@@ -116,6 +116,10 @@ input {
   padding: 1rem;
 }
 
+.students-list-container:nth-child(even) .student-container {
+  background-color: var(--secondary-color);
+}
+
 .student-list__list {
   width: 100%;
   display: flex;
@@ -125,5 +129,11 @@ input {
 
 .student-list__tools-container {
   display: flex;
-  gap: 0.2rem;
+  gap: 1rem;
+}
+
+.form__add-student-instructor-button,
+.form__cancel-button {
+  font-size: large;
+  font-weight: bold;
 }

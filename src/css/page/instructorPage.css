@@ -39,21 +39,7 @@
 
 .tools__edit-button,
 .tools__delete-button {
-  background-color: white;
-}
-
-.add-student-instructor__button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 70px;
-  height: 70px;
-  border: 1px solid black;
-  border-radius: 0.4rem;
-}
-
-.add-student-instructor__button:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: transparent;
 }
 
 .form__add-edit-student-instructor {
