@@ -44,9 +44,12 @@ class UICourses {
       // Step 3: Add Content
       title.textContent = course.courseName;
       instructorTitle.textContent = `Instructor: ${course.instructor}`;
+
       studentsTitle.textContent = "Students:";
-      studentNames.textContent = course.students;
+      const studentNamesArray = course.students.map((s) => s.name);
+      studentNames.textContent = studentNamesArray.join(", ");
       maxStudentsInfo.textContent = `${course.students.length}/${course.maxStudents}`;
+
       editButton.textContent = "🖊️";
       deleteButton.textContent = "🗑️";
 
@@ -62,31 +65,7 @@ class UICourses {
 
       // Delete course
       deleteButton.addEventListener("click", () => {
-        this.openDeleteModal(course.courseName); // Open modal.
-
-        deleteCourse(); // Where to add delete course???
-
-        const confirmButton = document.querySelector(
-          ".delete-modal__confirm-button"
-        );
-        this.openDeleteModal(course.courseName);
-
-        if (this.prevousConfirmDeleteEvent) {
-          confirmButton.removeEventListener(
-            "click",
-            this.prevousConfirmDeleteEvent
-          );
-        }
-
-        this.previousConfirmDeleteEvent = (e) => {
-          CourseManagement.removeCourse(course.courseId);
-          this.hideDeleteModal();
-        };
-
-        confirmButton.addEventListener(
-          "click",
-          this.previousConfirmDeleteEvent
-        );
+        this.openDeleteModal(course.courseName, course.courseId); // Open modal.
       });
 
       // Edit course
@@ -164,10 +143,18 @@ class UICourses {
     });
   };
 
-  static openDeleteModal(courseName) {
-    this.deleteModal.classList.add("delete-modal--show");
+  static openDeleteModal(courseName, id) {
     const modalMessage = document.querySelector(".delete-modal__message");
+    const confirmButton = document.querySelector(".delete-modal__confirm-button");
+
     modalMessage.textContent = `Are you sure you want to delete the following course: ${courseName}`;
+    this.deleteModal.classList.add("delete-modal--show");
+
+    confirmButton.addEventListener("click", () => {
+      CourseManagement.removeCourse(id);
+      this.closeDeleteModal();
+      UICourses.renderCourses(CourseManagement.coursesList);
+    });
   }
 
   static closeDeleteModal = () =>

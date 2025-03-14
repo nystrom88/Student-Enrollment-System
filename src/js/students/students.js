@@ -61,6 +61,7 @@ formModal.addEventListener("submit", (e) => {
   }
   formModal.reset();
   formModal.style.display = "none";
+  populateCourses();
 });
 
 cancelButton.addEventListener("click", () => {
@@ -105,39 +106,45 @@ coursesInput[1].addEventListener("change", () => {
   enableDisableCourseOptions();
 });
 
-// Populate student form with Courses
-const coursesSelects = document.querySelectorAll(
-  ".form__student-courses-select"
-);
-const coursesList = JSON.parse(localStorage.getItem("coursesList")) || [];
+const populateCourses = () => {
+  // Populate student form with Courses
+  const coursesSelects = document.querySelectorAll(
+    ".form__student-courses-select"
+  );
+  const coursesList = JSON.parse(localStorage.getItem("coursesList")) || [];
 
-coursesSelects.forEach((select, i) => {
-  select.innerHTML = "";
+  coursesSelects.forEach((select, i) => {
+    select.innerHTML = "";
 
-  const courseDefaultOption = document.createElement("option");
-  select.append(courseDefaultOption);
-  courseDefaultOption.textContent = "Unselected";
-  courseDefaultOption.value = "";
+    const courseDefaultOption = document.createElement("option");
+    select.append(courseDefaultOption);
+    courseDefaultOption.textContent = "Unselected";
+    courseDefaultOption.value = "";
 
-  coursesList.forEach((course, j) => {
-    const courseOption = document.createElement("option");
-    select.append(courseOption);
-    courseOption.textContent = course.courseName;
-    courseOption.value = course.courseName;
-    if (Number(coursesList[j].maxStudents) === coursesList[j].students.length) {
-      courseOption.disabled = true;
-      courseOption.title = "This course has been maxed out";
-    } else {
-      courseOption.disabled = false;
-      courseOption.title = "";
-    }
+    coursesList.forEach((course, j) => {
+      const courseOption = document.createElement("option");
+      select.append(courseOption);
+      courseOption.textContent = course.courseName;
+      courseOption.value = course.courseName;
+      if (
+        Number(coursesList[j].maxStudents) === coursesList[j].students.length
+      ) {
+        courseOption.disabled = true;
+        courseOption.title = "This course has been maxed out";
+      } else {
+        courseOption.disabled = false;
+        courseOption.title = "";
+      }
+    });
   });
-});
 
-addStudentInstructor.addEventListener("click", () => {
-  formModal.style.display = "flex";
-  confirmButton.textContent = "Add Student";
-  enableDisableCourseOptions();
-});
+  addStudentInstructor.addEventListener("click", () => {
+    formModal.style.display = "flex";
+    confirmButton.textContent = "Add Student";
+    enableDisableCourseOptions();
+  });
+};
+
+populateCourses();
 
 export default enableDisableCourseOptions;
