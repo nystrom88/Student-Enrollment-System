@@ -1,25 +1,19 @@
 import InstructorsManagement from "./instructorsManagement";
-import Instructor from "./instructorsClass";
 import InstructorValidation from "../formValidation/instructorValidation";
 import appState from "../core/appState";
+import CourseManagement from "../courses/coursesManagement";
 
 document.addEventListener("DOMContentLoaded", () => {
   InstructorsManagement.viewInstructorsList();
 });
 
 const formModal = document.querySelector(".form__add-edit-student-instructor");
-const addStudentInstructor = document.querySelector(
-  ".add-student-instructor__button"
-);
+const addStudentInstructor = document.querySelector(".add-student-instructor__button");
 
-const confirmButton = document.querySelector(
-  ".form__add-student-instructor-button"
-);
+const confirmButton = document.querySelector(".form__add-student-instructor-button");
 
 const cancelButton = document.querySelector(".form__cancel-button");
-const coursesInput = document.querySelectorAll(
-  ".form__instructor-courses-select"
-);
+const coursesInput = document.querySelectorAll(".form__instructor-courses-select");
 
 // Form
 formModal.addEventListener("submit", (e) => {
@@ -31,19 +25,18 @@ formModal.addEventListener("submit", (e) => {
 
   const instructorName = document.querySelector(".form__instructor-name-input");
   const instructorAge = document.querySelector(".form__instructor-age-input");
-  const instructorEmail = document.querySelector(
-    ".form__instructor-email-input"
-  );
+  const instructorEmail = document.querySelector(".form__instructor-email-input");
 
-  const instructorCourse1 = document.querySelector("#course1");
-  const instructorCourse2 = document.querySelector("#course2");
-  const instructorCourse3 = document.querySelector("#course3");
+  const instructorCourse1 = document.querySelector("#instructor-courses1");
+  const instructorCourse2 = document.querySelector("#instructor-courses2");
+  const instructorCourse3 = document.querySelector("#instructor-courses3");
 
   const instructorCourses = [
     instructorCourse1.value,
     instructorCourse2.value,
     instructorCourse3.value,
   ];
+
   if (!appState.editingInstructortId) {
     InstructorsManagement.addInstructors(
       instructorName,
@@ -110,14 +103,11 @@ coursesInput[1].addEventListener("change", () => {
 
 const populateCourses = () => {
   // Populate instructor form with Courses
-  const coursesSelects = document.querySelectorAll(
-    ".form__instructor-courses-select"
-  );
-  const coursesList = JSON.parse(localStorage.getItem("coursesList")) || [];
+  const coursesSelects = document.querySelectorAll(".form__instructor-courses-select");
+  const coursesList = CourseManagement.getCourses();
 
   coursesSelects.forEach((select, i) => {
     select.innerHTML = "";
-
     const courseDefaultOption = document.createElement("option");
     select.append(courseDefaultOption);
     courseDefaultOption.textContent = "Unselected";
@@ -128,10 +118,8 @@ const populateCourses = () => {
       select.append(courseOption);
       courseOption.textContent = course.courseName;
       courseOption.value = course.courseName;
-      if (
-        Number(coursesList[i].maxInstructors) ===
-        coursesList[i].instructors.length
-      ) {
+
+      if (coursesList[i].instructor) {
         courseOption.disabled = true;
         courseOption.title = "This course has been maxed out";
       } else {
