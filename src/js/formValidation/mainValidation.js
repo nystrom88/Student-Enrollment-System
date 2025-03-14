@@ -6,6 +6,7 @@ class MainValidation {
       const validationMessage = document.querySelector(
         `.form__${field.name}-message`
       );
+      console.log(validationMessage);
 
       const inputFields = document.querySelector(
         `#${field.name}, [name='${field.name}']`
