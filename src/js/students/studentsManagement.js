@@ -1,7 +1,6 @@
 import appState from "../core/appState";
 import enableDisableCourseOptions from "./students";
 import Student from "./studentsClass";
-// import studentsList from "./studentsList";
 
 class StudentManagement {
   static viewStudentsList() {
@@ -11,11 +10,8 @@ class StudentManagement {
     const listContainer = document.querySelector(".student-list__list");
     listContainer.innerHTML = "";
 
-    const formModal = document.querySelector(
-      ".form__add-edit-student-instructor"
-    );
+    const formModal = document.querySelector(".form__add-edit-student-instructor");
     const studentsList = JSON.parse(localStorage.getItem("student-list")) || [];
-    console.log(studentsList);
 
     studentsList.forEach((student, i) => {
       // Create/select Elements
@@ -30,24 +26,13 @@ class StudentManagement {
       const toolsContainer = document.createElement("div");
       const editButton = document.createElement("button");
       const deleteButton = document.createElement("button");
-      const confirmButton = document.querySelector(
-        ".form__add-student-instructor-button"
-      );
+      const confirmButton = document.querySelector(".form__add-student-instructor-button");
 
       // Appending
       listContainer.append(listElement);
       listElement.append(studentContainer);
-      studentContainer.append(
-        listElementName,
-        listCourses,
-        listElementEmail,
-        toolsContainer
-      );
-      listCourses.append(
-        listElementCourse1,
-        listElementCourse2,
-        listElementCourse3
-      );
+      studentContainer.append(listElementName, listCourses, listElementEmail, toolsContainer);
+      listCourses.append(listElementCourse1, listElementCourse2, listElementCourse3);
       toolsContainer.append(editButton, deleteButton);
 
       // Applying classes
@@ -80,12 +65,8 @@ class StudentManagement {
 
       deleteButton.addEventListener("click", () => {
         const deleteModal = document.querySelector(".delete-modal");
-        const confirmDeleteButton = document.querySelector(
-          ".delete-modal__confirm-button"
-        );
-        const declineDeleteButton = document.querySelector(
-          ".delete-modal__cancel-button"
-        );
+        const confirmDeleteButton = document.querySelector(".delete-modal__confirm-button");
+        const declineDeleteButton = document.querySelector(".delete-modal__cancel-button");
         deleteModal.classList.add("delete-modal--show");
 
         confirmDeleteButton.addEventListener("click", () => {
@@ -101,13 +82,7 @@ class StudentManagement {
     });
   }
 
-  static addStudent(
-    studentName,
-    studentAge,
-    studentEmail,
-    studentEnrollmentYear,
-    studentCourses
-  ) {
+  static addStudent(studentName, studentAge, studentEmail, studentEnrollmentYear, studentCourses) {
     // Update studentsList and local storage with newly added Student
     const studentsList = JSON.parse(localStorage.getItem("student-list")) || [];
     const newStudent = new Student(
@@ -142,9 +117,7 @@ class StudentManagement {
     console.log("editing student");
 
     const studentsList = JSON.parse(localStorage.getItem("student-list")) || [];
-    const studentNameInput = document.querySelector(
-      ".form__student-name-input"
-    );
+    const studentNameInput = document.querySelector(".form__student-name-input");
     const studentAgeInput = document.querySelector(".form__student-age-input");
     const studentCourse1Select = document.querySelector("#course1");
     const studentCourse2Select = document.querySelector("#course2");
@@ -152,9 +125,7 @@ class StudentManagement {
     const studentEnrollmentYearInput = document.querySelector(
       ".form__student-enrollment-year-select"
     );
-    const studentEmailInput = document.querySelector(
-      ".form__student-email-input"
-    );
+    const studentEmailInput = document.querySelector(".form__student-email-input");
 
     const studentToEdit = studentsList.find((student) => student.id === id);
 
@@ -198,9 +169,7 @@ class StudentManagement {
 
   static removeStudent(studentId) {
     const studentsList = JSON.parse(localStorage.getItem("student-list")) || [];
-    const filteredStudents = studentsList.filter(
-      (student) => student.id !== studentId
-    );
+    const filteredStudents = studentsList.filter((student) => student.id !== studentId);
     localStorage.setItem("student-list", JSON.stringify(filteredStudents));
     this.viewStudentsList();
   }
