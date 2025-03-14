@@ -89,12 +89,20 @@ class UICourses {
 
     this.courseForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      const courseNameInput = document.querySelector(".form__course-name-input");
-      const courseMaxStudentsInput = document.querySelector(".form__course-max-students-input");
+      const courseNameInput = document.querySelector(
+        ".form__course-name-input"
+      );
+      const courseMaxStudentsInput = document.querySelector(
+        ".form__course-max-students-input"
+      );
       if (!appState.editState) {
         CourseManagement.addCourse(courseNameInput, courseMaxStudentsInput);
       } else {
-        CourseManagement.editCourse(appState.editState, courseNameInput, courseMaxStudentsInput);
+        CourseManagement.editCourse(
+          appState.editState,
+          courseNameInput,
+          courseMaxStudentsInput
+        );
         appState.editState = null;
         this.closeFormModal();
       }
@@ -104,13 +112,17 @@ class UICourses {
     });
   };
 
-  static openFormModal = () => this.courseForm.classList.add("form__add-edit-course--show");
+  static openFormModal = () =>
+    this.courseForm.classList.add("form__add-edit-course--show");
 
-  static closeFormModal = () => this.courseForm.classList.remove("form__add-edit-course--show");
+  static closeFormModal = () =>
+    this.courseForm.classList.remove("form__add-edit-course--show");
 
   static populateFormFields(id) {
     const courseNameInput = document.querySelector(".form__course-name-input");
-    const courseMaxStudentsInput = document.querySelector(".form__course-max-students-input");
+    const courseMaxStudentsInput = document.querySelector(
+      ".form__course-max-students-input"
+    );
 
     const courses = CourseManagement.getCourses();
     const course = courses.find((course) => course.courseId === id);
@@ -123,7 +135,9 @@ class UICourses {
   }
 
   static initDeleteModal = () => {
-    const deleteModalCancelButton = document.querySelector(".delete-modal__cancel-button");
+    const deleteModalCancelButton = document.querySelector(
+      ".delete-modal__cancel-button"
+    );
     deleteModalCancelButton.addEventListener("click", () => {
       this.closeDeleteModal();
     });
@@ -143,7 +157,8 @@ class UICourses {
     });
   }
 
-  static closeDeleteModal = () => this.deleteModal.classList.remove("delete-modal--show");
+  static closeDeleteModal = () =>
+    this.deleteModal.classList.remove("delete-modal--show");
 
   static init() {
     this.renderCourses(CourseManagement.getCourses());

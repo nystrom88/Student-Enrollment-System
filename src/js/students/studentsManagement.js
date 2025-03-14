@@ -1,3 +1,5 @@
+import appState from "../core/appState";
+import enableDisableCourseOptions from "./students";
 import Student from "./studentsClass";
 // import studentsList from "./studentsList";
 
@@ -155,7 +157,6 @@ class StudentManagement {
     );
 
     const studentToEdit = studentsList.find((student) => student.id === id);
-    console.log(studentToEdit);
 
     studentNameInput.value = studentToEdit.name;
     studentAgeInput.value = studentToEdit.age;
@@ -164,6 +165,35 @@ class StudentManagement {
     studentCourse3Select.value = studentToEdit.courses[2];
     studentEnrollmentYearInput.value = studentToEdit.enrollmentYear;
     studentEmailInput.value = studentToEdit.email;
+
+    appState.editingStudentId = studentToEdit.id;
+
+    enableDisableCourseOptions();
+  }
+
+  static updateStudent(
+    id,
+    studentName,
+    studentAge,
+    studentEmail,
+    studentEnrollmentYear,
+    studentCourses
+  ) {
+    const studentsList = JSON.parse(localStorage.getItem("student-list")) || [];
+
+    const studentToUpdate = studentsList.find((student) => student.id === id);
+
+    if (studentToUpdate) {
+      studentToUpdate.name = studentName;
+      studentToUpdate.age = studentAge;
+      studentToUpdate.email = studentEmail;
+      studentToUpdate.enrollmentYear = studentEnrollmentYear;
+      studentToUpdate.courses = studentCourses;
+
+      localStorage.setItem("student-list", JSON.stringify(studentsList));
+      this.viewStudentsList();
+      appState.editingStudentId = null;
+    }
   }
 
   static removeStudent(studentId) {
