@@ -44,9 +44,12 @@ class UICourses {
       // Step 3: Add Content
       title.textContent = course.courseName;
       instructorTitle.textContent = `Instructor: ${course.instructor}`;
+
       studentsTitle.textContent = "Students:";
-      studentNames.textContent = course.students;
+      const studentNamesArray = course.students.map((s) => s.name);
+      studentNames.textContent = studentNamesArray.join(", ");
       maxStudentsInfo.textContent = `${course.students.length}/${course.maxStudents}`;
+
       editButton.textContent = "🖊️";
       deleteButton.textContent = "🗑️";
 
